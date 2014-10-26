@@ -9,6 +9,18 @@ package vwc;
  *
  * @author Raim
  */
-public class Pieza {
+public abstract class Pieza {
+    protected String tipo;
+    protected int hp;
+    protected int sp;
+    protected int ap;
+    
+    public abstract Pieza atacar();
+    public abstract void mover (int fila, int columna);
+    
+    @Override
+    public String toString() {
+        return "Pieza{" + "tipo=" + tipo + ", hp=" + hp + ", sp=" + sp + ", ap=" + ap + '}';
+    }
     
 }
