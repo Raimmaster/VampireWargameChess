@@ -28,6 +28,18 @@ nbproject/*
 !nbproject/project.properties
 !nbproject/project.xml
 
+project-root-directory/
++ build/
++ dist/
++ nbproject/
+  build-impl.xml
+  + private/
+  + project.properties
+  + project.xml
++ src/
++ test/
++ build.xml
+
 #general swap/backup files
 *.so
 *.log
