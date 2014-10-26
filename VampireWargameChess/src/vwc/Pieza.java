@@ -42,6 +42,12 @@ public abstract class Pieza {
      */
     public abstract void mover (int fila, int columna);
     
+    /**
+     * Recibir el dano ocasionado por x pieza
+     * @param hp Cantidad de dano inflingido
+     */
+    public abstract void defender(int hp);
+    
     @Override
     public String toString() {
         return "Pieza{" + "tipo=" + tipo + ", hp=" + hp + ", sp=" + sp + ", ap=" + ap + '}';
