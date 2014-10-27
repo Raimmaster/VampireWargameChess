@@ -17,6 +17,24 @@ public abstract class Pieza {
     protected int ap; //attack points
     
     /**
+     * Constructor de pieza
+     * @param h Cantidad de HP que tendrá
+     * @param s Cantidad de SP que tendrá
+     * @param a Cantidad de AP que tendrá
+     * @param r Número de fila
+     * @param c Número de columna
+     * @param t Nombre del tipo
+     */
+    public Pieza(int h, int s, int a, int r, int c, String t){
+        tipo = t;
+        row = r;
+        column = s;
+        hp = h;
+        sp = s;
+        ap = a;
+    }
+    
+    /**
      * Realiza la acción necesaria de ataque
      * @param p Objeto Pieza que se quiere atacar
      */
