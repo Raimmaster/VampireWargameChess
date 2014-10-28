@@ -41,5 +41,10 @@ public class Necromancer extends Pieza{
     public Boolean validarMovimiento(int fila, int columna) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void updatePosiciones() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
