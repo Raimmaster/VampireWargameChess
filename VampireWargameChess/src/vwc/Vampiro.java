@@ -30,7 +30,12 @@ public class Vampiro extends Pieza{
     }
     
     @Override
-    public void defender(int hp){
+    public void defender(int ap){
         
+    }
+
+    @Override
+    public Boolean validarMovimiento(int fila, int columna) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

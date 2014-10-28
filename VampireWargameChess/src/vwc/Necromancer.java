@@ -17,16 +17,28 @@ public class Necromancer extends Pieza{
 
     @Override
     public void atacar(Pieza p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      p.defender(ap);
     }
 
     @Override
     public void mover(int fila, int columna) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
     }
 
     @Override
     public void defender(int hp) {
+        if (sp>0 && ap>0){
+            sp-=1;
+            defender(ap-1);
+        }else if (hp>0 && ap>0){
+                hp-=1;
+                defender(ap-1);
+        }else if (hp==0 && ap>0)
+            System.out.printf("Pieza {%s} destruida!%n",tipo);
+    }
+
+    @Override
+    public Boolean validarMovimiento(int fila, int columna) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

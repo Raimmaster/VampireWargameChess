@@ -62,9 +62,17 @@ public abstract class Pieza {
     
     /**
      * Recibir el dano ocasionado por x pieza
-     * @param hp Cantidad de dano inflingido
+     * @param ap Cantidad de dano inflingido
      */
-    public abstract void defender(int hp);
+    public abstract void defender(int ap);
+    
+    /**
+     * Funcion para validar el movimiento de x pieza
+     * @param fila Posicion de la fila a la que se desea mover
+     * @param columna Posicion de la columna a la que se desea mover
+     * @return 
+     */
+    public abstract Boolean validarMovimiento(int fila, int columna);
     
     @Override
     public String toString() {
