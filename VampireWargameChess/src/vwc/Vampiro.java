@@ -10,13 +10,14 @@ package vwc;
  * @author Raim
  */
 public class Vampiro extends Pieza{
-    private final static int VIDA_VAMP = 4;
+    /*private final static int VIDA_VAMP = 4;
     private final static int ESCUDO_VAMP = 5;
     private final static int ATTACK_VAMP = 3;
-    private final static String TIPO = "Vampiro";
+    private final static String TIPO = "Vampiro";*/
     
     public Vampiro(){
-        super(VIDA_VAMP, ESCUDO_VAMP, ATTACK_VAMP, 0, 1, TIPO);
+        super(TipoPieza.VAMPIRO.hp, TipoPieza.VAMPIRO.sp, TipoPieza.VAMPIRO.ap,
+                0, 1, TipoPieza.VAMPIRO.getTipo());
     }
     
     @Override
@@ -26,7 +27,7 @@ public class Vampiro extends Pieza{
     
     @Override
     public boolean mover(int fila, int columna){
-        return false;
+        return true;
     }
     
     @Override
@@ -39,7 +40,8 @@ public class Vampiro extends Pieza{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void updatePosiciones() {
+    @Override
+    public void updatePosiciones(int fila, int columna) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
