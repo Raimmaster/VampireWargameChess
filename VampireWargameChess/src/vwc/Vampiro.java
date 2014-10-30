@@ -25,8 +25,8 @@ public class Vampiro extends Pieza{
     }
     
     @Override
-    public void mover(int fila, int columna){
-        
+    public boolean mover(int fila, int columna){
+        return false;
     }
     
     @Override
@@ -39,7 +39,6 @@ public class Vampiro extends Pieza{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public void updatePosiciones() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
