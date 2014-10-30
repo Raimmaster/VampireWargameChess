@@ -11,8 +11,9 @@ package vwc;
  */
 public class Necromancer extends Pieza{
 
-    public Necromancer(int h, int s, int a, int r, int c, String t) {
-        super(h, s, a, r, c, t);
+    public Necromancer(int r, int c, String t) {
+        super(TipoPieza.NECROMANCER.hp, TipoPieza.NECROMANCER.sp, TipoPieza.NECROMANCER.ap,
+                r, c, TipoPieza.NECROMANCER.getTipo());
     }
 
 }

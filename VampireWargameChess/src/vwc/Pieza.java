@@ -71,6 +71,7 @@ public abstract class Pieza {
                 if (x.validarPosicion(fila, columna)==true){
                     state = true;
                     //codigo para mover la pieza
+                    updatePosiciones(fila, columna);
                 }
             }
         }         
@@ -120,5 +121,31 @@ public abstract class Pieza {
     public String toString() {
         return "Pieza{" + "tipo=" + tipo + ", hp=" + hp + ", sp=" + sp + ", ap=" + ap + '}';
     }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public int getSp() {
+        return sp;
+    }
+
+    public void setSp(int sp) {
+        this.sp = sp;
+    }
+
+    public int getAp() {
+        return ap;
+    }
+
+    public void setAp(int ap) {
+        this.ap = ap;
+    }
+    
+    
     
 }
