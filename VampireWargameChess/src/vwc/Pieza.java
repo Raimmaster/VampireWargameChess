@@ -35,13 +35,16 @@ public abstract class Pieza {
         hp = h;
         sp = s;
         ap = a;
+        updatePosiciones(row, column);
     }
     
     /**
      * Realiza la acción necesaria de ataque
      * @param p Objeto Pieza que se quiere atacar
      */
-    public abstract void atacar(Pieza p);
+    public void atacar(Pieza p){
+        p.defender(ap);
+    }
     
     /**
      * Valida la posición de la pieza
@@ -61,13 +64,33 @@ public abstract class Pieza {
      * @param fila Número de la fila donde nos queremos mover
      * @param columna Número de la columna donde nos queremos mover
      */
-    public abstract void mover (int fila, int columna);
+    public boolean mover (int fila, int columna){
+        boolean state = false;
+        if (validarPosicion(fila,columna)==true){
+            for (Posicion x : posiciones){
+                if (x.validarPosicion(fila, columna)==true){
+                    state = true;
+                    //codigo para mover la pieza
+                }
+            }
+        }         
+        return state;
+    }
     
     /**
      * Recibir el dano ocasionado por x pieza
      * @param ap Cantidad de dano inflingido
      */
-    public abstract void defender(int ap);
+    public void defender(int ap){
+        if (sp>0 && ap>0){
+            sp-=1;
+            defender(ap-1);
+        }else if (hp>0 && ap>0){
+                hp-=1;
+                defender(ap-1);
+        }else if (hp==0)
+            System.out.printf("Pieza {%s} destruida!%n",tipo);
+    }
     
     /**
      * Funcion para validar el movimiento de x pieza
@@ -75,12 +98,23 @@ public abstract class Pieza {
      * @param columna Posicion de la columna a la que se desea mover
      * @return 
      */
-    public abstract Boolean validarMovimiento(int fila, int columna);
+    public Boolean validarMovimiento(int fila, int columna){
+        return true;
+    }
     
     /**
      * Funcion para actualizar las posiciones a las que la pieza x se puede mover
      */
-    public abstract void updatePosiciones();
+    public void updatePosiciones(int fila, int columna){
+        if (fila>0)
+            posiciones.add(new Posicion(fila+1, columna));
+        if (fila<6)
+            posiciones.add(new Posicion(fila-1, columna));
+        if (columna>0)
+            posiciones.add(new Posicion(fila, columna-1));
+        if (columna<6)
+            posiciones.add(new Posicion(fila, columna+1));
+    }
     
     @Override
     public String toString() {
