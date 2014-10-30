@@ -107,14 +107,28 @@ public abstract class Pieza {
      * Funcion para actualizar las posiciones a las que la pieza x se puede mover
      */
     public void updatePosiciones(int fila, int columna){
-        if (fila>0)
+        if (fila>0){
             posiciones.add(new Posicion(fila+1, columna));
-        if (fila<6)
+            if (columna>0)
+                posiciones.add(new Posicion(fila+1, columna-1));
+            if (columna<5)
+                posiciones.add(new Posicion(fila+1, columna+1));
+        }
+        if (fila<5){
             posiciones.add(new Posicion(fila-1, columna));
+            if (columna>0)
+                posiciones.add(new Posicion(fila-1, columna-1));
+            if (columna<5)
+                posiciones.add(new Posicion(fila-1, columna+1));
+        }
         if (columna>0)
             posiciones.add(new Posicion(fila, columna-1));
-        if (columna<6)
+        if (columna<5)
             posiciones.add(new Posicion(fila, columna+1));
+        
+        //(f - 1, c - 1), (f - 1, c), (f - 1, c + 1);
+        //(f, c - 1), (f, c + 1);
+        //(f + 1, c - 1), (f + 1, c), (f + 1, c + 1).
     }
     
     @Override
