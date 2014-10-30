@@ -63,6 +63,7 @@ public abstract class Pieza {
      * Mover la pieza a la coordenada especificada
      * @param fila Número de la fila donde nos queremos mover
      * @param columna Número de la columna donde nos queremos mover
+     * @return <code>true</code> si se puede mover
      */
     public boolean mover (int fila, int columna){
         boolean state = false;
@@ -104,7 +105,9 @@ public abstract class Pieza {
     }
     
     /**
-     * Funcion para actualizar las posiciones a las que la pieza x se puede mover
+     * 
+     * @param fila
+     * @param columna 
      */
     public void updatePosiciones(int fila, int columna){
         if (fila>0){
@@ -160,6 +163,8 @@ public abstract class Pieza {
         this.ap = ap;
     }
     
+    public abstract void submenu();
     
+    public abstract void llamar(int opcion);
     
 }
