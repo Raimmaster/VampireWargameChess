@@ -99,7 +99,7 @@ public abstract class Pieza {
      * @param columna Posicion de la columna a la que se desea mover
      * @return 
      */
-    public Boolean validarMovimiento(int fila, int columna){
+    public boolean validarMovimiento(int fila, int columna){
         return true;
     }
     
