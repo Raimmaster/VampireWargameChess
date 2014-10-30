@@ -17,7 +17,7 @@ public class Vampiro extends Pieza{
     
     public Vampiro(){
         super(TipoPieza.VAMPIRO.hp, TipoPieza.VAMPIRO.sp, TipoPieza.VAMPIRO.ap,
-                0, 1, TipoPieza.VAMPIRO.getTipo());
+                0, 1, TipoPieza.VAMPIRO.getTipo(), 'P');
     }
     
     @Override
@@ -36,12 +36,18 @@ public class Vampiro extends Pieza{
     }
 
     @Override
-    public boolean validarMovimiento(int fila, int columna) {
+    public void submenu() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void updatePosiciones(int fila, int columna) {
+    public void llamar(int opcion) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void ataqueEspecial() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

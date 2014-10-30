@@ -13,7 +13,22 @@ public class Necromancer extends Pieza{
 
     public Necromancer(int r, int c, String t) {
         super(TipoPieza.NECROMANCER.hp, TipoPieza.NECROMANCER.sp, TipoPieza.NECROMANCER.ap,
-                r, c, TipoPieza.NECROMANCER.getTipo());
+                r, c, TipoPieza.NECROMANCER.getTipo(), 'P');
+    }
+
+    @Override
+    public void submenu() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void llamar(int opcion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void ataqueEspecial() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

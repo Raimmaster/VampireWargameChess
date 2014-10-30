@@ -17,6 +17,7 @@ public abstract class Pieza {
     protected int hp; //health points
     protected int sp; //shield points
     protected int ap; //attack points
+    protected char color; //color, B o N
     protected ArrayList<Posicion> posiciones = new ArrayList<>();
     
     /**
@@ -28,13 +29,14 @@ public abstract class Pieza {
      * @param c Número de columna
      * @param t Nombre del tipo
      */
-    public Pieza(int h, int s, int a, int r, int c, String t){
+    public Pieza(int h, int s, int a, int r, int c, String t, char col){
         tipo = t;
         row = r;
-        column = s;
+        column = c;
         hp = h;
         sp = s;
         ap = a;
+        color = col;
         updatePosiciones(row, column);
     }
     
@@ -166,5 +168,7 @@ public abstract class Pieza {
     public abstract void submenu();
     
     public abstract void llamar(int opcion);
+    
+    public abstract void ataqueEspecial();
     
 }
