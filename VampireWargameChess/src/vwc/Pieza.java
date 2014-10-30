@@ -5,6 +5,8 @@
  */
 package vwc;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Raim
@@ -15,6 +17,7 @@ public abstract class Pieza {
     protected int hp; //health points
     protected int sp; //shield points
     protected int ap; //attack points
+    protected ArrayList<Posicion> posiciones = new ArrayList<>();
     
     /**
      * Constructor de pieza
@@ -62,9 +65,22 @@ public abstract class Pieza {
     
     /**
      * Recibir el dano ocasionado por x pieza
-     * @param hp Cantidad de dano inflingido
+     * @param ap Cantidad de dano inflingido
      */
-    public abstract void defender(int hp);
+    public abstract void defender(int ap);
+    
+    /**
+     * Funcion para validar el movimiento de x pieza
+     * @param fila Posicion de la fila a la que se desea mover
+     * @param columna Posicion de la columna a la que se desea mover
+     * @return 
+     */
+    public abstract Boolean validarMovimiento(int fila, int columna);
+    
+    /**
+     * Funcion para actualizar las posiciones a las que la pieza x se puede mover
+     */
+    public abstract void updatePosiciones();
     
     @Override
     public String toString() {

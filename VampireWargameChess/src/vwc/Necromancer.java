@@ -7,31 +7,34 @@ package vwc;
 
 /**
  *
- * @author Raim
+ * @author ADMIN
  */
-public class Vampiro extends Pieza{
-    private final static int VIDA_VAMP = 4;
-    private final static int ESCUDO_VAMP = 5;
-    private final static int ATTACK_VAMP = 3;
-    private final static String TIPO = "Vampiro";
-    
-    public Vampiro(){
-        super(VIDA_VAMP, ESCUDO_VAMP, ATTACK_VAMP, 0, 1, TIPO);
+public class Necromancer extends Pieza{
+
+    public Necromancer(int h, int s, int a, int r, int c, String t) {
+        super(h, s, a, r, c, t);
     }
-    
+
     @Override
-    public void atacar(Pieza p){
-        
+    public void atacar(Pieza p) {
+      p.defender(ap);
     }
-    
+
     @Override
-    public void mover(int fila, int columna){
-        
+    public void mover(int fila, int columna) {
+      
     }
-    
+
     @Override
-    public void defender(int ap){
-        
+    public void defender(int hp) {
+        if (sp>0 && ap>0){
+            sp-=1;
+            defender(ap-1);
+        }else if (hp>0 && ap>0){
+                hp-=1;
+                defender(ap-1);
+        }else if (hp==0 && ap>0)
+            System.out.printf("Pieza {%s} destruida!%n",tipo);
     }
 
     @Override
@@ -43,4 +46,5 @@ public class Vampiro extends Pieza{
     public void updatePosiciones() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }
