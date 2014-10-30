@@ -26,4 +26,10 @@ public class Posicion {
     public int getY(){
         return coordenadas[2];
     }
+    
+    public boolean validarPosicion(int px, int py){
+        if (px==coordenadas[1] && py==coordenadas[2])
+            return true;
+        return false;
+    }
 }
