@@ -169,6 +169,6 @@ public abstract class Pieza {
     
     public abstract void llamar(int opcion);
     
-    public abstract void ataqueEspecial();
+    public abstract void ataqueEspecial(Pieza p);
     
 }
