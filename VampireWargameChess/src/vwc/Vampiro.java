@@ -41,12 +41,17 @@ public class Vampiro extends Pieza{
     }
 
     @Override
-    public void llamar(int opcion) {
+    public void ataqueEspecial(Pieza p) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void ataqueEspecial(Pieza p) {
+    public Pieza llamar(int opcion, Pieza p, int fila, int columna) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int cantOpciones() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
