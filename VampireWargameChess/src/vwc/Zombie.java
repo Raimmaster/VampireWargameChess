@@ -12,8 +12,8 @@ package vwc;
  */
 public class Zombie extends Pieza{
 
-    public Zombie(int c, int r, char col) {
-        super(TipoPieza.ZOMBIE.hp, TipoPieza.ZOMBIE.sp,TipoPieza.ZOMBIE.ap,r,c,TipoPieza.ZOMBIE.getTipo(),col);
+    public Zombie(int h, int s, int a, int r, int c, String t, char col) {
+        super(h, s, a, r, c, t, col);
     }
 
     @Override
@@ -36,8 +36,4 @@ public class Zombie extends Pieza{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    @Override
-    public boolean mover(int fila, int mover){
-        return false;
-    }
 }
