@@ -28,6 +28,7 @@ public abstract class Pieza {
      * @param r Número de fila
      * @param c Número de columna
      * @param t Nombre del tipo
+     * @param col Color de la pieza
      */
     public Pieza(int h, int s, int a, int r, int c, String t, char col){
         tipo = t;
