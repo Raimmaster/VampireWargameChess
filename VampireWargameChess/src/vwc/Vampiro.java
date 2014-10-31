@@ -52,5 +52,6 @@ public class Vampiro extends Pieza{
     public int cantOpciones() {
         return 3;
     }
+    
 
 }

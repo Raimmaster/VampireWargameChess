@@ -18,17 +18,40 @@ public class Necromancer extends Pieza{
 
     @Override
     public void submenu() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void llamar(int opcion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.printf("Acciones Necromancer: %n "
+                + "1. Mover"
+                + "2. Atacar"
+                + "3. Ataque Especial"
+                + "4. Conjurar Zombie"
+                + "5. Atacar con Zombie");
     }
 
     @Override
     public void ataqueEspecial(Pieza p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int ap = p.getSp()+ (this.ap/2);
+        p.defender(ap);
+    }
+
+    @Override
+    public Pieza llamar(int opcion, Pieza p, int fila, int columna) {
+        Pieza q = null;
+        if (opcion==1)
+            mover(fila, columna);
+        if (opcion==2)
+            p.defender(ap);
+        if (opcion==3)
+            ataqueEspecial(p);
+        if (opcion==4)
+            //Crear Zombie
+            System.out.print("");
+        if (opcion==5)
+            p.defender(TipoPieza.ZOMBIE.ap);   
+        return q;
+    }
+
+    @Override
+    public int cantOpciones() {
+       return 5;
     }
 
 }
