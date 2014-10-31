@@ -27,7 +27,7 @@ public class Necromancer extends Pieza{
     }
 
     @Override
-    public void ataqueEspecial() {
+    public void ataqueEspecial(Pieza p) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

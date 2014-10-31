@@ -167,7 +167,9 @@ public abstract class Pieza {
     
     public abstract void submenu();
     
-    public abstract void llamar(int opcion);
+    public abstract Pieza llamar(int opcion, Pieza p, int fila, int columna);
+    
+    public abstract int cantOpciones();
     
     public abstract void ataqueEspecial(Pieza p);
     
