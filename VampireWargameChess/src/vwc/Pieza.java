@@ -37,7 +37,7 @@ public abstract class Pieza {
         sp = s;
         ap = a;
         color = col;
-        //updatePosiciones(row, column);
+        updatePosiciones(row, column);
     }
     
     /**
@@ -74,7 +74,7 @@ public abstract class Pieza {
                 if (x.validarPosicion(fila, columna)==true){
                     state = true;
                     //codigo para mover la pieza
-                    //updatePosiciones(fila, columna);
+                    updatePosiciones(fila, columna);
                 }
             }
         }         
