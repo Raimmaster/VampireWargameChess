@@ -104,7 +104,13 @@ public abstract class Pieza {
      * @return 
      */
     public boolean validarMovimiento(int fila, int columna){
-        return true;
+        boolean state = false;
+        for (Posicion x : posiciones){
+                if (x.validarPosicion(fila, columna)==true){
+                    state = true;
+                }
+        }
+        return state;
     }
     
     /**
@@ -113,14 +119,14 @@ public abstract class Pieza {
      * @param columna 
      */
     public void updatePosiciones(int fila, int columna){
-        if (fila>0){
+        if (fila<5){
             posiciones.add(new Posicion(fila+1, columna));
             if (columna>0)
                 posiciones.add(new Posicion(fila+1, columna-1));
             if (columna<5)
                 posiciones.add(new Posicion(fila+1, columna+1));
         }
-        if (fila<5){
+        if (fila>0){
             posiciones.add(new Posicion(fila-1, columna));
             if (columna>0)
                 posiciones.add(new Posicion(fila-1, columna-1));
@@ -164,6 +170,10 @@ public abstract class Pieza {
 
     public void setAp(int ap) {
         this.ap = ap;
+    }
+    
+    public char getColor(){
+        return color;
     }
     
     public abstract void submenu();

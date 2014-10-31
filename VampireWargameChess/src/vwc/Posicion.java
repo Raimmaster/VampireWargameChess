@@ -15,8 +15,8 @@ public class Posicion {
     private int coordenadas[] = new int[2];
     
     public Posicion(int x, int y){
-        coordenadas[1]=x;
-        coordenadas[2]=y;
+        coordenadas[0]=x;
+        coordenadas[1]=y;
     }
     
     public int getX(){

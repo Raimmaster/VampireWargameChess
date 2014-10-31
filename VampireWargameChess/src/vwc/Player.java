@@ -11,5 +11,29 @@ package vwc;
  * @author KELVIN
  */
 public class Player {
+    private String name;
+    private int points;
+    private char color;
     
+    public Player(String n){
+        name = n;
+        points = 0;
+        color = 'X';
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void addpoints(){
+        points+=3;
+    }
+    
+    public int getPoints(){
+        return points;
+    }
+    
+    public char getColor(){
+        return color;
+    }
 }
