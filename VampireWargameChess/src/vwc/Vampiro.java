@@ -15,39 +15,42 @@ public class Vampiro extends Pieza{
     private final static int ATTACK_VAMP = 3;
     private final static String TIPO = "Vampiro";*/
     
-    public Vampiro(){
+    public Vampiro(int r, int c){
         super(TipoPieza.VAMPIRO.hp, TipoPieza.VAMPIRO.sp, TipoPieza.VAMPIRO.ap,
-                0, 1, TipoPieza.VAMPIRO.getTipo(), 'P');
+                r, c, TipoPieza.VAMPIRO.getTipo(), 'P');
     }
     
-    @Override
-    public void atacar(Pieza p){
-        
-    }
-    
-    @Override
-    public boolean mover(int fila, int columna){
-        return true;
-    }
-    
-    @Override
-    public void defender(int ap){
-        
-    }
-
     @Override
     public void submenu() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void llamar(int opcion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.printf("Acciones Vampiro: %n "
+                + "1. Mover\n"
+                + "2. Atacar\n"
+                + "3. Ataque Especial\n");
     }
 
     @Override
     public void ataqueEspecial(Pieza p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        p.setHp(p.hp - 1);
+        hp += 1;
+    }
+
+    @Override
+    public Pieza llamar(int opcion, Pieza p, int fila, int columna) {
+        Pieza q = null;
+        
+        if (opcion == 1)
+            mover(fila, columna);
+        else if (opcion == 2)
+            atacar(p);
+        else if (opcion == 3)
+            ataqueEspecial(p);
+        
+        return q;
+    }
+
+    @Override
+    public int cantOpciones() {
+        return 3;
     }
 
 }
