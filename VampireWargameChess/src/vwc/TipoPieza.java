@@ -10,15 +10,15 @@ package vwc;
  * @author Raim
  */
 public enum TipoPieza {
-    VAMPIRO(4, 5, 3){//hp 4, sp 5, ap 3
-        @Override
-        public String getTipo(){
-            return "Vampiro";
-        };
-    }, HOMBRE_LOBO(5, 2, 5){//hp 5, sp 2, ap 5
+    HOMBRE_LOBO(5, 2, 5){//hp 5, sp 2, ap 5
         @Override
         public String getTipo(){
             return "Hombre Lobo";
+        };
+    }, VAMPIRO(4, 5, 3){//hp 4, sp 5, ap 3
+        @Override
+        public String getTipo(){
+            return "Vampiro";
         };
     }, NECROMANCER(3, 1, 4){//hp 3, sp 1, ap 4
         @Override

@@ -14,11 +14,14 @@ import java.util.Scanner;
  * @author KELVIN
  */
 public class GameBoard {
-    Scanner rd = new Scanner(System.in);
+    private static Scanner rd = new Scanner(System.in);
+    private static final int COLUMNAS = 6;
+    private static final int FILAS = 6;
+
     Random rnd;
     
-    Pieza chess[][] = new Pieza[6][6];
-    String piezas[][] = new String[6][6];
+    Pieza chess[][] = new Pieza[FILAS][COLUMNAS];
+    String piezas[][] = new String[FILAS][COLUMNAS];
     Player actual = null;
     
     public GameBoard(){
@@ -33,14 +36,16 @@ public class GameBoard {
         do{
             //GAME!
             finish = gameOver();
-            if (actual==x) actual=y;
-            else actual=x;
-        }while(finish=='X');
+            if (actual == x) 
+                actual = y;
+            else
+                actual = x;
+        }while(finish == 'X');
     }
     
     private void gameInit(){
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
+        for (int i = 0; i < FILAS; i++) {
+            for (int j = 0; j < COLUMNAS; j++) {
                 piezas[i][j]="__";
             }
         }
@@ -54,19 +59,23 @@ public class GameBoard {
         for (Pieza x[] : chess){
             for (Pieza y : x){
                 if (y!=null){
-                    if (y.getColor()=='B') b++;
-                    else n++;
+                    if (y.getColor() == 'B')
+                        b++;
+                    else 
+                        n++;
                 }
             }
         }
-        if (b==0) return 'N';
-        else if (n==0) return 'B';
+        if (b == 0) 
+            return 'N';
+        else if (n == 0) 
+            return 'B';
         return 'X';
     }
     
     private void printGameBoard(){
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
+        for (int i = 0; i < FILAS; i++) {
+            for (int j = 0; j < COLUMNAS; j++) {
                 System.out.print(piezas[i][j]+" ");
             }
             System.out.println("");
