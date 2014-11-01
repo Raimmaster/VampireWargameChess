@@ -15,14 +15,15 @@ import java.util.Scanner;
  */
 public class GameBoard {
     private static Scanner rd = new Scanner(System.in);
+    private static Random rnd = new Random();
     private static final int COLUMNAS = 6;
     private static final int FILAS = 6;
-
-    Random rnd;
     
-    Pieza chess[][] = new Pieza[FILAS][COLUMNAS];
-    String piezas[][] = new String[FILAS][COLUMNAS];
-    Player actual = null;
+    private Pieza chess[][] = new Pieza[FILAS][COLUMNAS];
+    private String piezas[][] = new String[FILAS][COLUMNAS];
+    private Player actual = null;
+    private String tipoActual = null;
+    private int ruleta = 0;
     
     public GameBoard(){
         gameInit();
@@ -31,10 +32,24 @@ public class GameBoard {
     
     public GameBoard(Player x, Player y){
         gameInit();
+        x.setColor('B');
+        y.setColor('N');
         actual = x;
         char finish = 'X';
         do{
             //GAME!
+            if (actual.getCantGiros()==1){
+                ruleta = girarRuleta();
+                if (ruleta==1)
+                    tipoActual = "Hombre Lobo";
+                else if (ruleta==2)
+                    tipoActual = "Vampiro";
+                else
+                    tipoActual = "Necromancer";
+                System.out.print(ruleta);
+            }else{
+                
+            }
             finish = gameOver();
             if (actual == x) 
                 actual = y;
@@ -80,5 +95,9 @@ public class GameBoard {
             }
             System.out.println("");
         }
+    }
+    
+    private int girarRuleta(){
+        return rnd.nextInt()*3+1;
     }
 }

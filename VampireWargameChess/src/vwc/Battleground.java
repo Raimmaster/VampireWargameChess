@@ -20,6 +20,11 @@ public class Battleground {
     public static void main(String[] args) {
         Scanner rd = new Scanner(System.in);
         Random rnd;
+        System.out.println("\033[32m   ******");
+        System.out.println("\033[32m ***");
+        System.out.println("\033[32m**** ASTLEVANIA CHESS");
+        System.out.println("\033[32m ***");
+        System.out.println("\033[32m   ******");
         
         GameBoard nx = new GameBoard();
         
