@@ -20,15 +20,15 @@ public class Posicion {
     }
     
     public int getX(){
-        return coordenadas[1];
+        return coordenadas[0];
     }
     
     public int getY(){
-        return coordenadas[2];
+        return coordenadas[1];
     }
     
     public boolean validarPosicion(int px, int py){
-        if (px == coordenadas[1] && py == coordenadas[2])
+        if (px == coordenadas[0] && py == coordenadas[1])
             return true;
         return false;
     }
