@@ -15,8 +15,8 @@ public class Posicion {
     private int coordenadas[] = new int[2];
     
     public Posicion(int x, int y){
-        coordenadas[0]=x;
-        coordenadas[1]=y;
+        coordenadas[0] = x;
+        coordenadas[1] = y;
     }
     
     public int getX(){
@@ -28,7 +28,7 @@ public class Posicion {
     }
     
     public boolean validarPosicion(int px, int py){
-        if (px==coordenadas[1] && py==coordenadas[2])
+        if (px == coordenadas[1] && py == coordenadas[2])
             return true;
         return false;
     }

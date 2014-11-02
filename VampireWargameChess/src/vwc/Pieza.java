@@ -70,9 +70,9 @@ public abstract class Pieza {
      */
     public boolean mover (int fila, int columna){
         boolean state = false;
-        if (validarPosicion(fila,columna)==true){
+        if (validarPosicion(fila,columna)){
             for (Posicion x : posiciones){
-                if (x.validarPosicion(fila, columna)==true){
+                if (x.validarPosicion(fila, columna)){
                     state = true;
                     //codigo para mover la pieza
                     //updatePosiciones(fila, columna);
@@ -87,14 +87,14 @@ public abstract class Pieza {
      * @param ap Cantidad de dano inflingido
      */
     public void defender(int ap){
-        if (sp>0 && ap>0){
-            sp-=1;
-            defender(ap-1);
-        }else if (hp>0 && ap>0){
-                hp-=1;
-                defender(ap-1);
-        }else if (hp==0)
-            System.out.printf("Pieza {%s} destruida!%n",tipo);
+        if (sp > 0 && ap > 0){
+            sp -= 1;
+            defender(ap - 1);
+        }else if (hp > 0 && ap > 0){
+            hp -= 1;
+            defender(ap - 1);
+        }else if (hp == 0)
+            System.out.printf("Pieza {%s} destruida!%n", tipo);
     }
     
     /**
@@ -106,7 +106,7 @@ public abstract class Pieza {
     public boolean validarMovimiento(int fila, int columna){
         boolean state = false;
         for (Posicion x : posiciones){
-                if (x.validarPosicion(fila, columna)==true){
+                if (x.validarPosicion(fila, columna) == true){
                     state = true;
                 }
         }
@@ -119,24 +119,24 @@ public abstract class Pieza {
      * @param columna 
      */
     public void updatePosiciones(int fila, int columna){
-        if (fila<5){
-            posiciones.add(new Posicion(fila+1, columna));
-            if (columna>0)
-                posiciones.add(new Posicion(fila+1, columna-1));
-            if (columna<5)
-                posiciones.add(new Posicion(fila+1, columna+1));
+        if (fila < 5){
+            posiciones.add(new Posicion(fila + 1, columna));
+            if (columna > 0)
+                posiciones.add(new Posicion(fila + 1, columna - 1));
+            if (columna < 5)
+                posiciones.add(new Posicion(fila + 1, columna + 1));
         }
-        if (fila>0){
-            posiciones.add(new Posicion(fila-1, columna));
-            if (columna>0)
-                posiciones.add(new Posicion(fila-1, columna-1));
-            if (columna<5)
-                posiciones.add(new Posicion(fila-1, columna+1));
+        if (fila > 0){
+            posiciones.add(new Posicion(fila - 1, columna));
+            if (columna > 0)
+                posiciones.add(new Posicion(fila - 1, columna - 1));
+            if (columna < 5)
+                posiciones.add(new Posicion(fila - 1, columna + 1));
         }
-        if (columna>0)
-            posiciones.add(new Posicion(fila, columna-1));
-        if (columna<5)
-            posiciones.add(new Posicion(fila, columna+1));
+        if (columna > 0)
+            posiciones.add(new Posicion(fila, columna - 1));
+        if (columna < 5)
+            posiciones.add(new Posicion(fila, columna + 1));
     }
         
     @Override
@@ -181,32 +181,3 @@ public abstract class Pieza {
     public abstract void ataqueEspecial(Pieza p);
     
 }
-    /*
-     * 
-     * @param fila
-     * @param columna 
-     */
-//    public void updatePosiciones(int fila, int columna){
-//        if (fila>0){
-//            posiciones.add(new Posicion(fila+1, columna));
-//            if (columna>0)
-//                posiciones.add(new Posicion(fila+1, columna-1));
-//            if (columna<5)
-//                posiciones.add(new Posicion(fila+1, columna+1));
-//        }
-//        if (fila<5){
-//            posiciones.add(new Posicion(fila-1, columna));
-//            if (columna>0)
-//                posiciones.add(new Posicion(fila-1, columna-1));
-//            if (columna<5)
-//                posiciones.add(new Posicion(fila-1, columna+1));
-//        }
-//        if (columna>0)
-//            posiciones.add(new Posicion(fila, columna-1));
-//        if (columna<5)
-//            posiciones.add(new Posicion(fila, columna+1));
-//        
-//        //(f - 1, c - 1), (f - 1, c), (f - 1, c + 1);
-//        //(f, c - 1), (f, c + 1);
-//        //(f + 1, c - 1), (f + 1, c), (f + 1, c + 1).
-//    }
