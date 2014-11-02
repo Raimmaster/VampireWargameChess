@@ -103,10 +103,10 @@ public final class GameBoard {
     }
     
     private char gameOver(){
-        int b=0, n=0;
+        int b = 0, n = 0;
         for (Pieza x[] : chess){
             for (Pieza y : x){
-                if (y!=null){
+                if (y != null){
                     if (y.getColor() == 'B')
                         b++;
                     else 
@@ -125,7 +125,7 @@ public final class GameBoard {
         System.out.print("\t**********************\n\t*");
         for (int i = 0; i < FILAS; i++) {
             for (int j = 0; j < COLUMNAS; j++) {
-                System.out.print(" "+piezas[i][j]);
+                System.out.print(" " + piezas[i][j]);
             }
             System.out.print("  *\n\t*");
         }

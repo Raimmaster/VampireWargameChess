@@ -88,10 +88,10 @@ public abstract class Pieza {
      */
     public void defender(int ap){
         if (sp > 0 && ap > 0){
-            sp -= 1;
+            sp--;
             defender(ap - 1);
         }else if (hp > 0 && ap > 0){
-            hp -= 1;
+            hp--;
             defender(ap - 1);
         }else if (hp == 0)
             System.out.printf("Pieza {%s} destruida!%n", tipo);
