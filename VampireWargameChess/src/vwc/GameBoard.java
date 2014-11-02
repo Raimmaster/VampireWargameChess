@@ -144,7 +144,7 @@ public final class GameBoard {
             for (int j = 0; j < COLUMNAS; j++) {
                 System.out.print(" " + piezas[i][j]);
             }
-            System.out.print("  *\n\t*");
+            System.out.printf("  %d\n\t*", i);
         }
         System.out.println("*********************");
     }
