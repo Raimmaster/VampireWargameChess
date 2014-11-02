@@ -43,36 +43,36 @@ public final class GameBoard {
         do{
             //Girando la ruleta
             cantGiros = actual.getCantGiros();
-            if (cantGiros==1){
+            if (cantGiros == 1){
                 ruleta = girarRuleta();
-                if (ruleta==1)
+                if (ruleta == 1)
                     tipoActual = "Hombre Lobo";
-                else if (ruleta==2)
+                else if (ruleta == 2)
                     tipoActual = "Vampiro";
                 else
                     tipoActual = "Necromancer";
-                System.out.print("Tipo a mover: "+tipoActual);
+                System.out.print("Tipo a mover: " + tipoActual);
             }else{
                 do{
                     ruleta = girarRuleta();
-                    cantGiros-=1;
-                    if (ruleta==1)
+                    cantGiros--;
+                    if (ruleta == 1)
                         tipoActual = "Hombre Lobo";
-                    else if (ruleta==2)
+                    else if (ruleta == 2)
                         tipoActual = "Vampiro";
                     else
                         tipoActual = "Necromancer";
-                    System.out.println("Tipo a mover: "+tipoActual);
+                    System.out.println("Tipo a mover: " + tipoActual);
                     System.out.printf("Girar de nuevo la ruleta (Restantes: %d) (Si/No)? ", cantGiros);
                     opcion = rd.next();
-                }while(opcion.equalsIgnoreCase("si") && cantGiros>0);
+                }while(opcion.equalsIgnoreCase("si") && cantGiros > 0);
             }
             //Ingreso de coordenadas
             piezaRul = Character.toString(tipoActual.charAt(0)) + Character.toString(actual.getColor());
             
             do{
                 do{
-                    System.out.print("Ingrese fila de pieza: ");
+                    System.out.print("\nIngrese fila de pieza: ");
                     fila = rd.nextInt();
                 }while(fila>=0 && fila<=5);
                 do{
@@ -97,8 +97,33 @@ public final class GameBoard {
                 piezas[i][j]="__";
             }
         }
-        chess[0][0] = new Necromancer(0,0,'B');
-        piezas[0][0] = "NB";
+        chess[0][0] = new Wolf(0, 0,'B');
+        piezas[0][0] = "HB";
+        chess[0][1] = new Vampiro(0, 1,'B');
+        piezas[0][1] = "VB";
+        chess[0][2] = new Necromancer(0, 2,'B');
+        piezas[0][2] = "NB";
+        chess[0][3] = new Necromancer(0, 3,'B');
+        piezas[0][3] = "NB";
+        chess[0][4] = new Vampiro(0, 4,'B');
+        piezas[0][4] = "VB";    
+        chess[0][5] = new Wolf(0, 5,'B');
+        piezas[0][5] = "HB";
+        
+        chess[5][0] = new Wolf(5, 0,'N');
+        piezas[5][0] = "HN";
+        chess[5][1] = new Vampiro(5, 1,'N');
+        piezas[5][1] = "VN";
+        chess[5][2] = new Necromancer(5, 2,'N');
+        piezas[5][2] = "NN";
+        chess[5][3] = new Necromancer(5, 3,'N');
+        piezas[5][3] = "NN";
+        chess[5][4] = new Vampiro(5, 4,'N');
+        piezas[5][4] = "VN";    
+        chess[5][5] = new Wolf(5, 5,'N');
+        piezas[5][5] = "HN";
+        
+        
         //Demas piezas
     }
     

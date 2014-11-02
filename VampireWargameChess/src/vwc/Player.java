@@ -27,7 +27,7 @@ public class Player {
     }
     
     public void addpoints(){
-        points+=3;
+        points += 3;
     }
     
     public int getPoints(){
@@ -47,9 +47,9 @@ public class Player {
     }
     
     public int getCantGiros(){
-        if (pp>=4)
+        if (pp >= 4)
             return 3;
-        else if (pp>=2)
+        else if (pp >= 2)
             return 2;
         else
             return 1;

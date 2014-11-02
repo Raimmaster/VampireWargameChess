@@ -15,9 +15,9 @@ public class Vampiro extends Pieza{
     private final static int ATTACK_VAMP = 3;
     private final static String TIPO = "Vampiro";*/
     
-    public Vampiro(int r, int c){
+    public Vampiro(int r, int c, char col){
         super(TipoPieza.VAMPIRO.hp, TipoPieza.VAMPIRO.sp, TipoPieza.VAMPIRO.ap,
-                r, c, TipoPieza.VAMPIRO.getTipo(), 'P');
+                r, c, TipoPieza.VAMPIRO.getTipo(), col);
     }
     
     @Override

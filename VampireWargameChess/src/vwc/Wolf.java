@@ -11,9 +11,9 @@ package vwc;
  */
 public class Wolf extends Pieza {
 
-    public Wolf(int r, int c) {
+    public Wolf(int r, int c, char col) {
         super(TipoPieza.HOMBRE_LOBO.hp, TipoPieza.HOMBRE_LOBO.sp,
-                TipoPieza.HOMBRE_LOBO.ap, r, c, TipoPieza.HOMBRE_LOBO.getTipo(), 'P');
+                TipoPieza.HOMBRE_LOBO.ap, r, c, TipoPieza.HOMBRE_LOBO.getTipo(), col);
     }
 
     @Override
