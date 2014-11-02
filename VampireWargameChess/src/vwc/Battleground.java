@@ -63,12 +63,12 @@ public class Battleground {
         player1.resetPiezasPerdidas();
         player2.resetPiezasPerdidas();
         //System.out.print("Termino player2\n");
-        GameBoard nx = new GameBoard(player1,player2);       
+        GameBoard nx = new GameBoard(player1, player2);       
         
     }
     
     private static Player existe(String n){
-        for (Player x:players){
+        for (Player x : players){
             if (x.getName().equalsIgnoreCase(n))
                 return x;
         }

@@ -63,25 +63,22 @@ public final class GameBoard {
                     else
                         tipoActual = "Necromancer";
                     System.out.println("Tipo a mover: " + tipoActual);
-                    System.out.printf("Girar de nuevo la ruleta (Restantes: %d) (Si/No)? ", cantGiros);
-                    opcion = rd.next();
-                }while(opcion.equalsIgnoreCase("si") && cantGiros > 0);
+                }while(cantGiros > 0);
             }
+            piezaRul = Character.toString(tipoActual.charAt(0)) + Character.toString(actual.getColor());//elegir el tipo de pieza que se puede usar          
             //Ingreso de coordenadas
-            piezaRul = Character.toString(tipoActual.charAt(0)) + Character.toString(actual.getColor());
-            
             do{
                 do{
                     System.out.print("\nIngrese fila de pieza: ");
                     fila = rd.nextInt();
-                }while(fila>=0 && fila<=5);
+                }while(fila < 0 && fila > 5);
                 do{
                     System.out.print("Ingrese columna de pieza: ");
                     columna = rd.nextInt();
-                }while(columna>=0 && columna<=5);
+                }while(columna < 0 && columna > 5);
                 if (piezas[fila][columna].equalsIgnoreCase(piezaRul))
                     state=true;
-            }while (state==true);
+            }while(!state);
             
             finish = gameOver();
             if (actual == x) 
