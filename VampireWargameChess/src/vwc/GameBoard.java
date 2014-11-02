@@ -97,34 +97,28 @@ public final class GameBoard {
                 piezas[i][j]="__";
             }
         }
-        chess[0][0] = new Wolf(0, 0,'B');
-        piezas[0][0] = "HB";
-        chess[0][1] = new Vampiro(0, 1,'B');
-        piezas[0][1] = "VB";
-        chess[0][2] = new Necromancer(0, 2,'B');
-        piezas[0][2] = "NB";
-        chess[0][3] = new Necromancer(0, 3,'B');
-        piezas[0][3] = "NB";
-        chess[0][4] = new Vampiro(0, 4,'B');
-        piezas[0][4] = "VB";    
-        chess[0][5] = new Wolf(0, 5,'B');
-        piezas[0][5] = "HB";
-        
-        chess[5][0] = new Wolf(5, 0,'N');
-        piezas[5][0] = "HN";
-        chess[5][1] = new Vampiro(5, 1,'N');
-        piezas[5][1] = "VN";
-        chess[5][2] = new Necromancer(5, 2,'N');
-        piezas[5][2] = "NN";
-        chess[5][3] = new Necromancer(5, 3,'N');
-        piezas[5][3] = "NN";
-        chess[5][4] = new Vampiro(5, 4,'N');
-        piezas[5][4] = "VN";    
-        chess[5][5] = new Wolf(5, 5,'N');
-        piezas[5][5] = "HN";
-        
-        
-        //Demas piezas
+        //Ciclo para inicializar las piezas correctamente
+        for(int i = 0; i < FILAS; i += 5){
+            char colour;
+            if (i == 0)
+                colour = 'B';
+            else
+                colour = 'N';
+            
+            for(int j = 0; j < COLUMNAS; j++){
+                if(j == 0 || j == 5){
+                    chess[i][j] = new Wolf(i, j, colour);
+                    piezas[i][j] = "H" + colour;
+                }else if( j == 1 || j == 4)
+                {
+                    chess[i][j] = new Vampiro(i, j, colour);
+                    piezas[i][j] = "V" + colour;
+                }else if(j == 2 || j == 3){
+                    chess[i][j] = new Necromancer(i, j, colour);
+                    piezas[i][j] = "N" + colour;
+                }
+            }
+        }
     }
     
     private char gameOver(){
