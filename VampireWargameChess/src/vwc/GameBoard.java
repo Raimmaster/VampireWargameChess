@@ -30,7 +30,6 @@ public final class GameBoard {
     }
     
     public GameBoard(Player x, Player y){
-        boolean state = false;
         String tipoActual = null, opcion, piezaRul;
         int ruleta = 0, cantGiros, fila, columna;
         
@@ -40,7 +39,8 @@ public final class GameBoard {
         y.setColor('N');
         actual = x;
         char finish = 'X';
-        do{
+        do{            
+            boolean state = false;
             //Girando la ruleta
             cantGiros = actual.getCantGiros();
             if (cantGiros == 1){
@@ -76,8 +76,9 @@ public final class GameBoard {
                     System.out.print("Ingrese columna de pieza: ");
                     columna = rd.nextInt();
                 }while(columna < 0 && columna > 5);
+                
                 if (piezas[fila][columna].equalsIgnoreCase(piezaRul))
-                    state=true;
+                    state = true;
             }while(!state);
             
             finish = gameOver();
