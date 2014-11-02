@@ -12,13 +12,13 @@ package vwc;
  */
 public class Player {
     private String name;
-    private int points, pp;
+    private int points, piezasPerdidas;
     private char color;
     
     public Player(String n){
         name = n;
         points = 0;
-        pp = 0;
+        piezasPerdidas = 0;
         color = 'X';
     }
     
@@ -43,13 +43,17 @@ public class Player {
     }
     
     public void aumentarPiezasPerdidas(){
-        pp++;
+        piezasPerdidas++;
+    }
+    
+    public void resetPiezasPerdidas(){
+        piezasPerdidas = 0;
     }
     
     public int getCantGiros(){
-        if (pp >= 4)
+        if (piezasPerdidas >= 4)
             return 3;
-        else if (pp >= 2)
+        else if (piezasPerdidas >= 2)
             return 2;
         else
             return 1;

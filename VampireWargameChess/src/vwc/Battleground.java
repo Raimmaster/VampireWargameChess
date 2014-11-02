@@ -44,7 +44,7 @@ public class Battleground {
                     player1 = null;
             }
         }while(player1 == null);
-        //System.out.print("Paso a player2\n");
+        //System.out.print("Paso a player2\n");            
         do{
             System.out.print("Ingrese nombre de Player2: ");
             jug2 = rd.next();
@@ -58,7 +58,10 @@ public class Battleground {
                 if (opcion.equalsIgnoreCase("no"))
                     player2 = null;
             }
-        }while(player2 == null);
+        }while(player2 == null);    
+        //RESET PIEZAS PERDIDAS A 0
+        player1.resetPiezasPerdidas();
+        player2.resetPiezasPerdidas();
         //System.out.print("Termino player2\n");
         GameBoard nx = new GameBoard(player1,player2);       
         
