@@ -43,14 +43,9 @@ public final class GameBoard {
             boolean state = false;
             //Girando la ruleta
             cantGiros = actual.getCantGiros();
+            System.out.println("\nTurno del jugador: " + actual.getName());
             if (cantGiros == 1){
-//                ruleta = girarRuleta();
-//                if (ruleta == 1)
-//                    tipoActual = "Hombre Lobo";
-//                else if (ruleta == 2)
-//                    tipoActual = "Vampiro";
-//                else
-//                    tipoActual = "Necromancer";
+                ruleta = girarRuleta();
             }else{
                 do{
                     ruleta = girarRuleta();
