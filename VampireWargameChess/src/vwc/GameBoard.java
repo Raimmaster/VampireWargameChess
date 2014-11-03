@@ -38,34 +38,35 @@ public final class GameBoard {
         x.setColor('B');
         y.setColor('N');
         actual = x;
-        char finish = 'X';
+        char finish;
         do{            
             boolean state = false;
             //Girando la ruleta
             cantGiros = actual.getCantGiros();
             if (cantGiros == 1){
-                ruleta = girarRuleta();
-                if (ruleta == 1)
-                    tipoActual = "Hombre Lobo";
-                else if (ruleta == 2)
-                    tipoActual = "Vampiro";
-                else
-                    tipoActual = "Necromancer";
-                System.out.print("Tipo a mover: " + tipoActual);
+//                ruleta = girarRuleta();
+//                if (ruleta == 1)
+//                    tipoActual = "Hombre Lobo";
+//                else if (ruleta == 2)
+//                    tipoActual = "Vampiro";
+//                else
+//                    tipoActual = "Necromancer";
             }else{
                 do{
                     ruleta = girarRuleta();
                     cantGiros--;
-                    if (ruleta == 1)
-                        tipoActual = "Hombre Lobo";
-                    else if (ruleta == 2)
-                        tipoActual = "Vampiro";
-                    else
-                        tipoActual = "Necromancer";
-                    System.out.println("Tipo a mover: " + tipoActual);
                 }while(cantGiros > 0);
-            }
-            piezaRul = Character.toString(tipoActual.charAt(0)) + Character.toString(actual.getColor());//elegir el tipo de pieza que se puede usar          
+            }                   
+            if (ruleta == 1)            
+                tipoActual = "Hombre Lobo";                
+            else if (ruleta == 2)            
+                tipoActual = "Vampiro";                
+            else            
+                tipoActual = "Necromancer";
+            System.out.print("Tipo a mover: " + tipoActual);
+
+            //elegir el tipo de pieza que se puede usar          
+            piezaRul = Character.toString(tipoActual.charAt(0)) + Character.toString(actual.getColor());            
             //Ingreso de coordenadas
             do{
                 do{
@@ -95,6 +96,11 @@ public final class GameBoard {
                 piezas[i][j]="__";
             }
         }
+        
+        inicializarPiezas();
+    }
+    
+    private void inicializarPiezas(){
         //Ciclo para inicializar las piezas correctamente
         for(int i = 0; i < FILAS; i += 5){
             char colour;
@@ -123,7 +129,7 @@ public final class GameBoard {
         int b = 0, n = 0;
         for (Pieza x[] : chess){
             for (Pieza y : x){
-                if (y != null){
+                if (!(y instanceof Zombie) && y != null){//obviar Zombies
                     if (y.getColor() == 'B')
                         b++;
                     else 
@@ -148,8 +154,7 @@ public final class GameBoard {
         }
         System.out.println("*********************");
     }
-    
-    
+        
     private int girarRuleta(){
         return rnd.nextInt(3)+1;
     }
