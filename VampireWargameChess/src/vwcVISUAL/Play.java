@@ -20,17 +20,36 @@ public class Play extends javax.swing.JFrame {
     private static final int COLUMNAS = 6;
     private static final int FILAS = 6;
     
+    private Player player1, player2;
     private Player actual = null;
     Ruleta girar = new Ruleta();
-    JButton[][] chess = new JButton[FILAS][COLUMNAS];
-    Pieza piezas [][] = new Pieza[FILAS][COLUMNAS];
+    static JButton[][] chess = new JButton[FILAS][COLUMNAS];
+    static Pieza piezas [][] = new Pieza[FILAS][COLUMNAS];
     /**
      * Creates new form Play
      */
-    public Play(){
+    public Play(Player x, Player y){
         initComponents();
+        player1=x;
+        player2=y;
+        player1.setColor('B');
+        player2.setColor('N');
     }
 
+    private void gameInit(){
+        int ix=10, iy=10;
+        int ex=100, ey=80;
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                //chess[i][j] = (JButton)("chess"+i+j);
+                //crear el boton
+                //ubicar el boton
+                //poner la imagen de fondo
+                //agrega el action
+            }
+        }
+        chess[0][0] = chess00;
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -354,10 +373,29 @@ public class Play extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Play().setVisible(true);
+                new Play(new Player(""),new Player("")).setVisible(true);
                 
             }
         });
+    }
+    
+    private char gameOver(){
+        int b = 0, n = 0;
+        for (JButton x[] : chess){
+            for (JButton y : x){
+//                if (!(y instanceof Zombie) && y != null){//obviar Zombies
+//                    if (y.getColor() == 'B')
+//                        b++;
+//                    else 
+//                        n++;
+//                }
+            }
+        }
+        if (b == 0) 
+            return 'N';
+        else if (n == 0) 
+            return 'B';
+        return 'X';
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -439,4 +477,6 @@ class Ruleta extends Thread {
                 x=0;
         }while(state==true);
     }
+    
+    
 }

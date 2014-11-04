@@ -5,13 +5,17 @@
  */
 
 package vwcVISUAL;
+import javax.swing.JOptionPane;
+import vwc.*;
 
 /**
  *
  * @author KELVIN
  */
 public class Inicio extends javax.swing.JFrame {
-
+    static String stplayer1;
+    static String stplayer2;
+    static Player player1, player2;
     /**
      * Creates new form Inicio
      */
@@ -32,9 +36,9 @@ public class Inicio extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtplayer1 = new javax.swing.JTextField();
         txtplayer2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        bcon1 = new javax.swing.JButton();
+        bcon2 = new javax.swing.JButton();
+        bjugar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Jugadores");
@@ -47,13 +51,28 @@ public class Inicio extends javax.swing.JFrame {
 
         txtplayer2.setEnabled(false);
 
-        jButton1.setText("Confirmar");
+        bcon1.setText("Confirmar");
+        bcon1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bcon1ActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Confirmar");
-        jButton2.setEnabled(false);
+        bcon2.setText("Confirmar");
+        bcon2.setEnabled(false);
+        bcon2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bcon2ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("JUGAR !");
-        jButton3.setEnabled(false);
+        bjugar.setText("JUGAR !");
+        bjugar.setEnabled(false);
+        bjugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bjugarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -62,7 +81,7 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bjugar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -70,13 +89,13 @@ public class Inicio extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtplayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1))
+                                .addComponent(bcon1))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtplayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)))
+                                .addComponent(bcon2)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -87,20 +106,61 @@ public class Inicio extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtplayer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(bcon1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtplayer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(bcon2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bjugar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bcon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bcon1ActionPerformed
+        stplayer1 = txtplayer1.getText();
+        Player buscar=existe(stplayer1);
+        if (buscar==null){
+            player1 = new Player (stplayer1);
+            bcon2.setEnabled(true);
+            txtplayer2.setEnabled(true);
+        }else{
+            int x = JOptionPane.showConfirmDialog(this, "Jugador ya existe, desea usarlo?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+            if (x == JOptionPane.YES_OPTION)
+                player1 = buscar;
+        }
+    }//GEN-LAST:event_bcon1ActionPerformed
+
+    private void bcon2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bcon2ActionPerformed
+        stplayer2 = txtplayer2.getText();
+        Player buscar=existe(stplayer1);
+        if (stplayer1.equalsIgnoreCase(stplayer2)==false){
+            if ( buscar==null){
+            player2 = new Player(stplayer2);
+            bjugar.setEnabled(true);
+            }else{
+                int x = JOptionPane.showConfirmDialog(this, "Jugador ya existe, desea usarlo?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+            if (x == JOptionPane.YES_OPTION)
+                player2 = buscar;
+            }
+        }else
+            JOptionPane.showMessageDialog(this, "Jugador ya seleccionado como Player1", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_bcon2ActionPerformed
+
+    private void bjugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bjugarActionPerformed
+        new Play(player1, player2).setVisible(true);
+    }//GEN-LAST:event_bjugarActionPerformed
+    
+    public static Player existe(String n){
+        for (Player x : Menu.players){
+            if (x.getName().equalsIgnoreCase(n))
+                return x;
+        }
+        return null;
+    }
     /**
      * @param args the command line arguments
      */
@@ -137,9 +197,9 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton bcon1;
+    private javax.swing.JButton bcon2;
+    private javax.swing.JButton bjugar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField txtplayer1;
