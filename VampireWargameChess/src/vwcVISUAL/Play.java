@@ -8,29 +8,29 @@ package vwcVISUAL;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.Timer;
+import vwc.*;
 
 /**
  *
  * @author KELVIN
  */
 public class Play extends javax.swing.JFrame {
+    private static final int COLUMNAS = 6;
+    private static final int FILAS = 6;
     
+    private Player actual = null;
+    Ruleta girar = new Ruleta();
+    JButton[][] chess = new JButton[FILAS][COLUMNAS];
+    Pieza piezas [][] = new Pieza[FILAS][COLUMNAS];
     /**
      * Creates new form Play
      */
     public Play(){
         initComponents();
-        timer.start();
     }
 
-    Timer timer = new Timer (100, new ActionListener () 
-{ 
-    public void actionPerformed(ActionEvent e) 
-    { 
-        System.out.print("Hola");
-     } 
-}); 
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,7 +91,8 @@ public class Play extends javax.swing.JFrame {
         batacar = new javax.swing.JButton();
         chess50 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("GameBoard");
         setPreferredSize(new java.awt.Dimension(625, 630));
         getContentPane().setLayout(null);
 
@@ -244,6 +245,7 @@ public class Play extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setLayout(null);
 
+        select.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
         select.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectActionPerformed(evt);
@@ -252,6 +254,7 @@ public class Play extends javax.swing.JFrame {
         jPanel1.add(select);
         select.setBounds(510, 10, 90, 70);
 
+        ruleta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
         ruleta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ruletaActionPerformed(evt);
@@ -352,6 +355,7 @@ public class Play extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Play().setVisible(true);
+                
             }
         });
     }
@@ -404,7 +408,35 @@ public class Play extends javax.swing.JFrame {
     private javax.swing.JProgressBar pap;
     private javax.swing.JProgressBar php;
     private javax.swing.JProgressBar psp;
-    private javax.swing.JButton ruleta;
+    public static javax.swing.JButton ruleta;
     private javax.swing.JButton select;
     // End of variables declaration//GEN-END:variables
+}
+
+class Ruleta extends Thread {
+    boolean state = true;
+    
+    
+    public void detener(){
+        state = false;
+    }
+    
+    
+    public void run(){
+        int x = 0;
+        do{
+            if (x==0){
+                Play.ruleta.setText("Hola");
+                x++;
+            }else if (x == 1){
+                Play.ruleta.setText("Adios");
+                x++;
+            }else{
+                Play.ruleta.setText("Hola de nuevo");
+                x++;
+            }
+            if (x >= 3)
+                x=0;
+        }while(state==true);
+    }
 }
