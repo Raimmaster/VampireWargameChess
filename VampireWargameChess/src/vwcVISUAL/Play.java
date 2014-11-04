@@ -9,7 +9,6 @@ package vwcVISUAL;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.Timer;
 import vwc.*;
 
 /**
@@ -23,8 +22,9 @@ public class Play extends javax.swing.JFrame {
     private Player player1, player2;
     private Player actual = null;
     Ruleta girar = new Ruleta();
-    static JButton[][] chess = new JButton[FILAS][COLUMNAS];
-    static Pieza piezas [][] = new Pieza[FILAS][COLUMNAS];
+    JButton[][] chess = new JButton[FILAS][COLUMNAS];
+    Pieza piezas [][] = new Pieza[FILAS][COLUMNAS];
+    int mov=0;
     /**
      * Creates new form Play
      */
@@ -34,21 +34,72 @@ public class Play extends javax.swing.JFrame {
         player2=y;
         player1.setColor('B');
         player2.setColor('N');
+        gameInit();
+        inicializarPiezas();
     }
-
+    
+    private void action(int x, int y){
+        
+    }
+    
     private void gameInit(){
         int ix=10, iy=10;
         int ex=100, ey=80;
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 6; j++) {
-                //chess[i][j] = (JButton)("chess"+i+j);
+        int i=0, j=0;
+        
+        for (i = 0; i < 6; i++) {
+            for (j = 0; j < 6; j++) {
                 //crear el boton
+                chess[i][j] = new javax.swing.JButton();
                 //ubicar el boton
+                getContentPane().add(chess[i][j]);
+                chess[i][j].setBounds(ix, iy, 90, 70);
+                chess[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
+                chess[i][j].setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/texts.jpg")));
+                chess[i][j].setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/textp.jpg")));
+                
+                chess[i][j].addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        System.out.print("Hola");
+                    }
+                });
                 //poner la imagen de fondo
                 //agrega el action
+                ix+=ex;
+            }
+            iy+=ey;
+            ix=10;
+        }
+        
+    }
+    
+//    public void chess[0][0]ActionPerformed(java.awt.event.ActionEvent evt){
+//        
+//    }
+    
+    private void inicializarPiezas(){
+        //Ciclo para inicializar las piezas correctamente
+        for(int i = 0; i < FILAS; i += 5){
+            char colour;
+            if (i == 0)
+                colour = 'b';
+            else
+                colour = 'n';
+            
+            for(int j = 0; j < COLUMNAS; j++){
+                if(j == 0 || j == 5){
+                    chess[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/wolf"+colour+".jpg")));
+                    chess[i][j].setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/wolf"+colour+".jpg")));
+                }else if( j == 1 || j == 4)
+                {
+                    chess[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/vamp"+colour+".jpg")));
+                    chess[i][j].setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/vamp"+colour+".jpg")));
+                }else if(j == 2 || j == 3){
+                    chess[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/reap"+colour+".jpg")));
+                    chess[i][j].setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/reap"+colour+".jpg")));
+                }
             }
         }
-        chess[0][0] = chess00;
     }
     
     /**
@@ -60,41 +111,6 @@ public class Play extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        chess02 = new javax.swing.JButton();
-        chess00 = new javax.swing.JButton();
-        chess01 = new javax.swing.JButton();
-        chess05 = new javax.swing.JButton();
-        chess03 = new javax.swing.JButton();
-        chess04 = new javax.swing.JButton();
-        chess12 = new javax.swing.JButton();
-        chess10 = new javax.swing.JButton();
-        chess11 = new javax.swing.JButton();
-        chess15 = new javax.swing.JButton();
-        chess13 = new javax.swing.JButton();
-        chess14 = new javax.swing.JButton();
-        chess22 = new javax.swing.JButton();
-        chess20 = new javax.swing.JButton();
-        chess21 = new javax.swing.JButton();
-        chess25 = new javax.swing.JButton();
-        chess23 = new javax.swing.JButton();
-        chess24 = new javax.swing.JButton();
-        chess32 = new javax.swing.JButton();
-        chess30 = new javax.swing.JButton();
-        chess31 = new javax.swing.JButton();
-        chess35 = new javax.swing.JButton();
-        chess33 = new javax.swing.JButton();
-        chess34 = new javax.swing.JButton();
-        chess42 = new javax.swing.JButton();
-        chess40 = new javax.swing.JButton();
-        chess41 = new javax.swing.JButton();
-        chess45 = new javax.swing.JButton();
-        chess43 = new javax.swing.JButton();
-        chess44 = new javax.swing.JButton();
-        chess52 = new javax.swing.JButton();
-        chess51 = new javax.swing.JButton();
-        chess55 = new javax.swing.JButton();
-        chess53 = new javax.swing.JButton();
-        chess54 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         select = new javax.swing.JButton();
         ruleta = new javax.swing.JButton();
@@ -108,163 +124,18 @@ public class Play extends javax.swing.JFrame {
         bmover = new javax.swing.JButton();
         bespecial = new javax.swing.JButton();
         batacar = new javax.swing.JButton();
-        chess50 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("GameBoard");
         setPreferredSize(new java.awt.Dimension(625, 630));
         getContentPane().setLayout(null);
 
-        chess02.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/reap.jpg"))); // NOI18N
-        getContentPane().add(chess02);
-        chess02.setBounds(210, 10, 90, 70);
-
-        chess00.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/wolf.jpg"))); // NOI18N
-        chess00.setToolTipText("WB");
-        chess00.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chess00ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(chess00);
-        chess00.setBounds(10, 10, 90, 70);
-
-        chess01.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/vamp.jpg"))); // NOI18N
-        getContentPane().add(chess01);
-        chess01.setBounds(110, 10, 90, 70);
-
-        chess05.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/wolf.jpg"))); // NOI18N
-        getContentPane().add(chess05);
-        chess05.setBounds(510, 10, 90, 70);
-
-        chess03.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/reap.jpg"))); // NOI18N
-        getContentPane().add(chess03);
-        chess03.setBounds(310, 10, 90, 70);
-
-        chess04.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/vamp.jpg"))); // NOI18N
-        getContentPane().add(chess04);
-        chess04.setBounds(410, 10, 90, 70);
-
-        chess12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess12);
-        chess12.setBounds(210, 90, 90, 70);
-
-        chess10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess10);
-        chess10.setBounds(10, 90, 90, 70);
-
-        chess11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess11);
-        chess11.setBounds(110, 90, 90, 70);
-
-        chess15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess15);
-        chess15.setBounds(510, 90, 90, 70);
-
-        chess13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess13);
-        chess13.setBounds(310, 90, 90, 70);
-
-        chess14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess14);
-        chess14.setBounds(410, 90, 90, 70);
-
-        chess22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess22);
-        chess22.setBounds(210, 170, 90, 70);
-
-        chess20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess20);
-        chess20.setBounds(10, 170, 90, 70);
-
-        chess21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess21);
-        chess21.setBounds(110, 170, 90, 70);
-
-        chess25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess25);
-        chess25.setBounds(510, 170, 90, 70);
-
-        chess23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess23);
-        chess23.setBounds(310, 170, 90, 70);
-
-        chess24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess24);
-        chess24.setBounds(410, 170, 90, 70);
-
-        chess32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess32);
-        chess32.setBounds(210, 250, 90, 70);
-
-        chess30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess30);
-        chess30.setBounds(10, 250, 90, 70);
-
-        chess31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess31);
-        chess31.setBounds(110, 250, 90, 70);
-
-        chess35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess35);
-        chess35.setBounds(510, 250, 90, 70);
-
-        chess33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess33);
-        chess33.setBounds(310, 250, 90, 70);
-
-        chess34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess34);
-        chess34.setBounds(410, 250, 90, 70);
-
-        chess42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess42);
-        chess42.setBounds(210, 330, 90, 70);
-
-        chess40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess40);
-        chess40.setBounds(10, 330, 90, 70);
-
-        chess41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess41);
-        chess41.setBounds(110, 330, 90, 70);
-
-        chess45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess45);
-        chess45.setBounds(510, 330, 90, 70);
-
-        chess43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess43);
-        chess43.setBounds(310, 330, 90, 70);
-
-        chess44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-        getContentPane().add(chess44);
-        chess44.setBounds(410, 330, 90, 70);
-
-        chess52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/reapb.jpg"))); // NOI18N
-        getContentPane().add(chess52);
-        chess52.setBounds(210, 410, 90, 70);
-
-        chess51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/vampb.jpg"))); // NOI18N
-        getContentPane().add(chess51);
-        chess51.setBounds(110, 410, 90, 70);
-
-        chess55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/wolfb.jpg"))); // NOI18N
-        getContentPane().add(chess55);
-        chess55.setBounds(510, 410, 90, 70);
-
-        chess53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/reapb.jpg"))); // NOI18N
-        getContentPane().add(chess53);
-        chess53.setBounds(310, 410, 90, 70);
-
-        chess54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/vampb.jpg"))); // NOI18N
-        getContentPane().add(chess54);
-        chess54.setBounds(410, 410, 90, 70);
-
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setLayout(null);
 
         select.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
+        select.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        select.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         select.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectActionPerformed(evt);
@@ -274,6 +145,7 @@ public class Play extends javax.swing.JFrame {
         select.setBounds(510, 10, 90, 70);
 
         ruleta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
+        ruleta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         ruleta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ruletaActionPerformed(evt);
@@ -319,10 +191,6 @@ public class Play extends javax.swing.JFrame {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 500, 610, 90);
 
-        chess50.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/wolfb.jpg"))); // NOI18N
-        getContentPane().add(chess50);
-        chess50.setBounds(10, 410, 90, 70);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -336,12 +204,6 @@ public class Play extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_selectActionPerformed
-
-    private void chess00ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chess00ActionPerformed
-        // TODO add your handling code here:
-        select.setIcon(chess00.getIcon());
-        
-    }//GEN-LAST:event_chess00ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -403,42 +265,6 @@ public class Play extends javax.swing.JFrame {
     private javax.swing.JButton bcrear;
     private javax.swing.JButton bespecial;
     private javax.swing.JButton bmover;
-    private javax.swing.JButton chess00;
-    private javax.swing.JButton chess01;
-    private javax.swing.JButton chess02;
-    private javax.swing.JButton chess03;
-    private javax.swing.JButton chess04;
-    private javax.swing.JButton chess05;
-    private javax.swing.JButton chess10;
-    private javax.swing.JButton chess11;
-    private javax.swing.JButton chess12;
-    private javax.swing.JButton chess13;
-    private javax.swing.JButton chess14;
-    private javax.swing.JButton chess15;
-    private javax.swing.JButton chess20;
-    private javax.swing.JButton chess21;
-    private javax.swing.JButton chess22;
-    private javax.swing.JButton chess23;
-    private javax.swing.JButton chess24;
-    private javax.swing.JButton chess25;
-    private javax.swing.JButton chess30;
-    private javax.swing.JButton chess31;
-    private javax.swing.JButton chess32;
-    private javax.swing.JButton chess33;
-    private javax.swing.JButton chess34;
-    private javax.swing.JButton chess35;
-    private javax.swing.JButton chess40;
-    private javax.swing.JButton chess41;
-    private javax.swing.JButton chess42;
-    private javax.swing.JButton chess43;
-    private javax.swing.JButton chess44;
-    private javax.swing.JButton chess45;
-    private javax.swing.JButton chess50;
-    private javax.swing.JButton chess51;
-    private javax.swing.JButton chess52;
-    private javax.swing.JButton chess53;
-    private javax.swing.JButton chess54;
-    private javax.swing.JButton chess55;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
