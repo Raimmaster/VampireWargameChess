@@ -7,14 +7,14 @@ package vwcVISUAL;
 
 import java.util.ArrayList;
 import javax.swing.JButton;
-import vwc.*;
+import vwc.Posicion;
 
 
 /**
  *
  * @author ADMIN
  */
-public abstract class JButtonx extends JButton{
+public class JButtonx extends JButton{
     public int hp;
     public int sp;
     public int ap;
@@ -22,6 +22,13 @@ public abstract class JButtonx extends JButton{
     public String tipo;
     public int row, column;
     public ArrayList<Posicion> posiciones = new ArrayList<>();
+    
+    public JButtonx(){
+        super();
+        sp=0;
+        ap=0;
+        hp=0;
+    }
     
     public JButtonx(int h, int s, int a, int r, int c, String t, char col){
         super();
@@ -166,11 +173,19 @@ public abstract class JButtonx extends JButton{
         return color;
     }
     
-    public abstract void submenu();
+    public  void submenu(){
+        
+    }
     
-    public abstract JButtonx llamar(int opcion, JButtonx p, int fila, int columna);
+    public  JButtonx llamar(int opcion, JButtonx p, int fila, int columna){
+        return null;
+    }
     
-    public abstract int cantOpciones();
+    public  int cantOpciones(){
+        return 0;
+    }
     
-    public abstract void ataqueEspecial(JButtonx p);
+    public  void ataqueEspecial(JButtonx p){
+        
+    }
 }

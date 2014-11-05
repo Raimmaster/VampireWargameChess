@@ -22,7 +22,8 @@ public class Play extends javax.swing.JFrame {
     private Player player1, player2;
     private Player actual = null;
     Ruleta girar = new Ruleta();
-    JButton[][] chess = new JButton[FILAS][COLUMNAS];
+    JButtonx[][] chess = new JButtonx[FILAS][COLUMNAS];
+    JButtonx bActual;
     Pieza piezas [][] = new Pieza[FILAS][COLUMNAS];
     int mov=0;
     /**
@@ -35,7 +36,7 @@ public class Play extends javax.swing.JFrame {
         player1.setColor('B');
         player2.setColor('N');
         gameInit();
-        inicializarPiezas();
+        //inicializarPiezas();
     }
     
     private void action(int x, int y){
@@ -43,24 +44,27 @@ public class Play extends javax.swing.JFrame {
     }
     
     private void gameInit(){
-        int ix=10, iy=10;
+        int ix=10, iy=90;
         int ex=100, ey=80;
         int i=0, j=0;
         
-        for (i = 0; i < 6; i++) {
+        for (i = 1; i < 5; i++) {
             for (j = 0; j < 6; j++) {
                 //crear el boton
-                chess[i][j] = new javax.swing.JButton();
+                chess[i][j] = new JButtonx();
                 //ubicar el boton
                 getContentPane().add(chess[i][j]);
                 chess[i][j].setBounds(ix, iy, 90, 70);
                 chess[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
                 chess[i][j].setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/texts.jpg")));
                 chess[i][j].setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/textp.jpg")));
-                
+                bActual = chess[i][j];
                 chess[i][j].addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        System.out.print("Hola");
+                    System.out.print("Hola");    
+                    psp.setValue(bActual.getSp());
+                    System.out.print(bActual.getSp());
+                    System.out.print("Adios");
                     }
                 });
                 //poner la imagen de fondo
@@ -70,6 +74,69 @@ public class Play extends javax.swing.JFrame {
             iy+=ey;
             ix=10;
         }
+        char color = 'B';
+        chess[0][0] = new JButtonWolf(i,j,color);
+        chess[0][5] = new JButtonWolf(i,j,color);
+        
+        chess[0][1] = new JButtonVampire(i,j,color);
+        chess[0][4] = new JButtonVampire(i,j,color);
+        
+        chess[0][2] = new JButtonNecromancer(i,j,color);
+        chess[0][3] = new JButtonNecromancer(i,j,color);
+        int n = 0;
+        ix = 10;
+        iy = 10;
+        ex = 100;
+        for (int k = 0; k < 6; k++) {
+                bActual = chess[n][k];
+                getContentPane().add(chess[n][k]);
+                chess[n][k].setBounds(ix, iy, 90, 70);
+                chess[n][k].setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
+                chess[n][k].setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/texts.jpg")));
+                chess[n][k].setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/textp.jpg")));
+                chess[n][k].addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    System.out.print("Hola");    
+                    psp.setValue(bActual.getSp());
+                    System.out.print(bActual.getSp());
+                    System.out.print("Adios");
+                    }
+                });
+                ix+=ex;
+        }
+        
+        
+        color = 'N';
+        chess[5][0] = new JButtonWolf(i,j,color);
+        chess[5][5] = new JButtonWolf(i,j,color);
+        
+        chess[5][1] = new JButtonVampire(i,j,color);
+        chess[5][4] = new JButtonVampire(i,j,color);
+        
+        chess[5][2] = new JButtonNecromancer(i,j,color);
+        chess[5][3] = new JButtonNecromancer(i,j,color);
+        
+        n = 5;
+        ix = 10;
+        iy = 410;
+        ex = 100;
+        for (int k = 0; k < 6; k++) {
+                bActual = chess[n][k];
+                getContentPane().add(chess[n][k]);
+                chess[n][k].setBounds(ix, iy, 90, 70);
+                chess[n][k].setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
+                chess[n][k].setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/texts.jpg")));
+                chess[n][k].setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/textp.jpg")));
+                chess[n][k].addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    System.out.print("Hola");    
+                    psp.setValue(bActual.getSp());
+                    System.out.print("Adios");
+                    }
+                });
+                ix+=ex;
+        }
+        
         
     }
     
@@ -88,13 +155,16 @@ public class Play extends javax.swing.JFrame {
             
             for(int j = 0; j < COLUMNAS; j++){
                 if(j == 0 || j == 5){
+                    chess[i][j] = new JButtonWolf(i,j,colour);
                     chess[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/wolf"+colour+".jpg")));
                     chess[i][j].setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/wolf"+colour+".jpg")));
                 }else if( j == 1 || j == 4)
                 {
+                    chess[i][j] = new JButtonVampire(i,j,colour);
                     chess[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/vamp"+colour+".jpg")));
                     chess[i][j].setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/vamp"+colour+".jpg")));
                 }else if(j == 2 || j == 3){
+                    chess[i][j] = new JButtonNecromancer(i,j,colour);
                     chess[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/reap"+colour+".jpg")));
                     chess[i][j].setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/reap"+colour+".jpg")));
                 }
@@ -155,6 +225,10 @@ public class Play extends javax.swing.JFrame {
         ruleta.setBounds(10, 10, 90, 70);
         jPanel1.add(pap);
         pap.setBounds(430, 60, 70, 14);
+
+        psp.setMaximum(5);
+        psp.setToolTipText("");
+        psp.setValue(0);
         jPanel1.add(psp);
         psp.setBounds(430, 20, 70, 14);
         jPanel1.add(php);
