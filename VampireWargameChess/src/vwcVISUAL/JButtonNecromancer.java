@@ -16,6 +16,9 @@ public class JButtonNecromancer extends JButtonx{
     public JButtonNecromancer(int r, int c, char col) {
         super(TipoPieza.NECROMANCER.hp, TipoPieza.NECROMANCER.sp, TipoPieza.NECROMANCER.ap,
                 r, c, TipoPieza.NECROMANCER.getTipo(), col);
+        
+        super.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/reap"+Character.toLowerCase(col)+".jpg")));
+        super.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/textp.jpg")));
     }
 
     @Override

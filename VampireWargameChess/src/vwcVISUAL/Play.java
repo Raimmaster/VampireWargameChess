@@ -9,23 +9,27 @@ package vwcVISUAL;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import vwc.*;
 
 /**
  *
  * @author KELVIN
  */
-public class Play extends javax.swing.JFrame {
+public class Play extends javax.swing.JFrame implements ActionListener{
     private static final int COLUMNAS = 6;
     private static final int FILAS = 6;
     
     private Player player1, player2;
     private Player actual = null;
     Ruleta girar = new Ruleta();
-    JButtonx[][] chess = new JButtonx[FILAS][COLUMNAS];
-    JButtonx bActual;
+    static JButtonx[][] chess = new JButtonx[FILAS][COLUMNAS];
     Pieza piezas [][] = new Pieza[FILAS][COLUMNAS];
-    int mov=0;
+    int accion=0;
+    int clics = 0;
+    JButtonx boton1;
+    JButtonx boton2;
+    String tipoActual = "Vacio";
     /**
      * Creates new form Play
      */
@@ -36,11 +40,9 @@ public class Play extends javax.swing.JFrame {
         player1.setColor('B');
         player2.setColor('N');
         gameInit();
+        desactivarBotones();
+        girar.start();
         //inicializarPiezas();
-    }
-    
-    private void action(int x, int y){
-        
     }
     
     private void gameInit(){
@@ -51,89 +53,57 @@ public class Play extends javax.swing.JFrame {
         for (i = 1; i < 5; i++) {
             for (j = 0; j < 6; j++) {
                 //crear el boton
-                chess[i][j] = new JButtonx();
+                chess[i][j] = new JButtonx(Integer.toString(i)+Integer.toString(j));
                 //ubicar el boton
                 getContentPane().add(chess[i][j]);
                 chess[i][j].setBounds(ix, iy, 90, 70);
-                chess[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-                chess[i][j].setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/texts.jpg")));
-                chess[i][j].setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/textp.jpg")));
-                bActual = chess[i][j];
-                chess[i][j].addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    System.out.print("Hola");    
-                    psp.setValue(bActual.getSp());
-                    System.out.print(bActual.getSp());
-                    System.out.print("Adios");
-                    }
-                });
-                //poner la imagen de fondo
-                //agrega el action
+                chess[i][j].addActionListener(this);
                 ix+=ex;
             }
             iy+=ey;
             ix=10;
         }
         char color = 'B';
-        chess[0][0] = new JButtonWolf(i,j,color);
-        chess[0][5] = new JButtonWolf(i,j,color);
+        i = 0;
+       
+        chess[0][0] = new JButtonWolf(i,0,color);
+        chess[0][5] = new JButtonWolf(i,5,color);
         
-        chess[0][1] = new JButtonVampire(i,j,color);
-        chess[0][4] = new JButtonVampire(i,j,color);
+        chess[0][1] = new JButtonVampire(i,1,color);
+        chess[0][4] = new JButtonVampire(i,4,color);
         
-        chess[0][2] = new JButtonNecromancer(i,j,color);
-        chess[0][3] = new JButtonNecromancer(i,j,color);
+        chess[0][2] = new JButtonNecromancer(i,2,color);
+        chess[0][3] = new JButtonNecromancer(i,3,color);
         int n = 0;
         ix = 10;
         iy = 10;
         ex = 100;
         for (int k = 0; k < 6; k++) {
-                bActual = chess[n][k];
                 getContentPane().add(chess[n][k]);
                 chess[n][k].setBounds(ix, iy, 90, 70);
-                chess[n][k].setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-                chess[n][k].setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/texts.jpg")));
-                chess[n][k].setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/textp.jpg")));
-                chess[n][k].addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    System.out.print("Hola");    
-                    psp.setValue(bActual.getSp());
-                    System.out.print(bActual.getSp());
-                    System.out.print("Adios");
-                    }
-                });
+                chess[n][k].addActionListener(this);
                 ix+=ex;
         }
         
-        
+        i=5;
         color = 'N';
-        chess[5][0] = new JButtonWolf(i,j,color);
-        chess[5][5] = new JButtonWolf(i,j,color);
+        chess[5][0] = new JButtonWolf(i,0,color);
+        chess[5][5] = new JButtonWolf(i,5,color);
         
-        chess[5][1] = new JButtonVampire(i,j,color);
-        chess[5][4] = new JButtonVampire(i,j,color);
+        chess[5][1] = new JButtonVampire(i,1,color);
+        chess[5][4] = new JButtonVampire(i,4,color);
         
-        chess[5][2] = new JButtonNecromancer(i,j,color);
-        chess[5][3] = new JButtonNecromancer(i,j,color);
+        chess[5][2] = new JButtonNecromancer(i,2,color);
+        chess[5][3] = new JButtonNecromancer(i,3,color);
         
         n = 5;
         ix = 10;
         iy = 410;
         ex = 100;
         for (int k = 0; k < 6; k++) {
-                bActual = chess[n][k];
                 getContentPane().add(chess[n][k]);
                 chess[n][k].setBounds(ix, iy, 90, 70);
-                chess[n][k].setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
-                chess[n][k].setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/texts.jpg")));
-                chess[n][k].setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/textp.jpg")));
-                chess[n][k].addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    System.out.print("Hola");    
-                    psp.setValue(bActual.getSp());
-                    System.out.print("Adios");
-                    }
-                });
+                chess[n][k].addActionListener(this);
                 ix+=ex;
         }
         
@@ -194,6 +164,9 @@ public class Play extends javax.swing.JFrame {
         bmover = new javax.swing.JButton();
         bespecial = new javax.swing.JButton();
         batacar = new javax.swing.JButton();
+        batacarz = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("GameBoard");
@@ -212,7 +185,7 @@ public class Play extends javax.swing.JFrame {
             }
         });
         jPanel1.add(select);
-        select.setBounds(510, 10, 90, 70);
+        select.setBounds(510, 20, 90, 70);
 
         ruleta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg"))); // NOI18N
         ruleta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -222,62 +195,133 @@ public class Play extends javax.swing.JFrame {
             }
         });
         jPanel1.add(ruleta);
-        ruleta.setBounds(10, 10, 90, 70);
+        ruleta.setBounds(10, 20, 90, 70);
+
+        pap.setMaximum(5);
         jPanel1.add(pap);
-        pap.setBounds(430, 60, 70, 14);
+        pap.setBounds(430, 70, 70, 14);
 
         psp.setMaximum(5);
         psp.setToolTipText("");
-        psp.setValue(0);
         jPanel1.add(psp);
-        psp.setBounds(430, 20, 70, 14);
+        psp.setBounds(430, 30, 70, 14);
+
+        php.setMaximum(5);
         jPanel1.add(php);
-        php.setBounds(430, 40, 70, 14);
+        php.setBounds(430, 50, 70, 14);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/ap.png"))); // NOI18N
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(410, 60, 20, 20);
+        jLabel1.setBounds(410, 70, 20, 20);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/sp.png"))); // NOI18N
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(410, 20, 20, 20);
+        jLabel2.setBounds(410, 30, 20, 20);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/hp.png"))); // NOI18N
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(410, 40, 20, 20);
+        jLabel3.setBounds(410, 50, 20, 20);
 
         bcrear.setText("CREAR Z.");
+        bcrear.setToolTipText("Crear Zombie");
+        bcrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bcrearActionPerformed(evt);
+            }
+        });
         jPanel1.add(bcrear);
-        bcrear.setBounds(260, 50, 110, 30);
+        bcrear.setBounds(230, 40, 110, 20);
 
         bmover.setText("MOVER");
+        bmover.setToolTipText("Mover X Pieza [Excepto Zombie]");
+        bmover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bmoverActionPerformed(evt);
+            }
+        });
         jPanel1.add(bmover);
-        bmover.setBounds(130, 10, 110, 30);
+        bmover.setBounds(110, 15, 110, 30);
 
         bespecial.setText("AT. ESPECIAL");
+        bespecial.setToolTipText("Realizar Ataque Especial [Si lo tiene]");
+        bespecial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bespecialActionPerformed(evt);
+            }
+        });
         jPanel1.add(bespecial);
-        bespecial.setBounds(130, 50, 110, 30);
+        bespecial.setBounds(110, 55, 110, 30);
 
         batacar.setText("ATACAR");
+        batacar.setToolTipText("Atacar a X Pieza");
+        batacar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                batacarActionPerformed(evt);
+            }
+        });
         jPanel1.add(batacar);
-        batacar.setBounds(260, 10, 110, 30);
+        batacar.setBounds(230, 10, 110, 20);
+
+        batacarz.setText("ATACAR Z.");
+        batacarz.setToolTipText("Atacar con Zombie");
+        batacarz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                batacarzActionPerformed(evt);
+            }
+        });
+        jPanel1.add(batacarz);
+        batacarz.setBounds(230, 70, 110, 20);
+
+        jLabel4.setText("Seleccion");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(534, 5, 50, 14);
+
+        jLabel5.setText("Ruleta");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(30, 5, 34, 14);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 500, 610, 90);
+        jPanel1.setBounds(0, 500, 610, 100);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void ruletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ruletaActionPerformed
         // TODO add your handling code here:
-        System.out.print("Hola");
-        
+        girar.detener();
+        ruleta.setEnabled(false);
+        tipoActual = girar.getTipo();
     }//GEN-LAST:event_ruletaActionPerformed
 
     private void selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectActionPerformed
         // TODO add your handling code here:
         
     }//GEN-LAST:event_selectActionPerformed
+
+    private void bmoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bmoverActionPerformed
+        // TODO add your handling code here:
+        accion = 1;
+    }//GEN-LAST:event_bmoverActionPerformed
+
+    private void batacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batacarActionPerformed
+        // TODO add your handling code here:
+        accion = 2;
+    }//GEN-LAST:event_batacarActionPerformed
+
+    private void bespecialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bespecialActionPerformed
+        // TODO add your handling code here:
+        accion = 3;
+    }//GEN-LAST:event_bespecialActionPerformed
+
+    private void bcrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bcrearActionPerformed
+        // TODO add your handling code here:
+        accion = 4;
+    }//GEN-LAST:event_bcrearActionPerformed
+
+    private void batacarzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batacarzActionPerformed
+        // TODO add your handling code here:
+        accion = 5;
+    }//GEN-LAST:event_batacarzActionPerformed
 
     /**
      * @param args the command line arguments
@@ -336,12 +380,15 @@ public class Play extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton batacar;
+    private javax.swing.JButton batacarz;
     private javax.swing.JButton bcrear;
     private javax.swing.JButton bespecial;
     private javax.swing.JButton bmover;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar pap;
     private javax.swing.JProgressBar php;
@@ -349,28 +396,87 @@ public class Play extends javax.swing.JFrame {
     public static javax.swing.JButton ruleta;
     private javax.swing.JButton select;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String coord = e.getActionCommand();
+        int x = coord.charAt(0) - 48;
+        int y = coord.charAt(1) - 48;
+            psp.setValue(chess[x][y].getSp());
+            php.setValue(chess[x][y].getHp());
+            pap.setValue(chess[x][y].getAp());
+        select.setIcon(chess[x][y].getIcon());
+        if (clics==0 && chess[x][y].getTipo().equalsIgnoreCase(tipoActual)){
+            int op = JOptionPane.showConfirmDialog(this, "Desea seleccionar esta pieza para ejecutar una accion?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+            if (op == JOptionPane.YES_OPTION){
+                boton1 = chess[x][y];
+                clics++;
+            }
+        }else if (clics != 0){
+            int op = JOptionPane.showConfirmDialog(this, "Desea seleccionar esta pieza para ejecutar la accion seleccionada sobre ella?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+            if (op == JOptionPane.YES_OPTION){
+                boton2 = chess[x][y];
+                clics--;
+                desactivarBotones();
+                ruleta.setEnabled(true);
+            }
+        }
+    }
+    
+    public static void desactivarBotones(){
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                chess[i][j].setEnabled(false);
+            }
+        }
+    }
+    
+    public static void activarBotones(){
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                chess[i][j].setEnabled(true);
+            }
+        }
+    }
+    
+    public void activarOpciones(){
+        bmover.setEnabled(true);
+        batacar.setEnabled(true);
+        bespecial.setEnabled(true);
+        bcrear.setEnabled(true);
+        batacarz.setEnabled(true);
+    }
+    
+    public void desactivarOpciones(){
+        bmover.setEnabled(false);
+        batacar.setEnabled(false);
+        bespecial.setEnabled(false);
+        bcrear.setEnabled(false);
+        batacarz.setEnabled(false);
+    }
 }
 
 class Ruleta extends Thread {
     boolean state = true;
-    
+    int x = 0;
     
     public void detener(){
         state = false;
+        Play.activarBotones();
     }
     
     
     public void run(){
-        int x = 0;
+        
         do{
             if (x==0){
-                Play.ruleta.setText("Hola");
+                Play.ruleta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/wolfb.jpg")));
                 x++;
             }else if (x == 1){
-                Play.ruleta.setText("Adios");
+                Play.ruleta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/vampb.jpg")));
                 x++;
             }else{
-                Play.ruleta.setText("Hola de nuevo");
+                Play.ruleta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/reapb.jpg")));
                 x++;
             }
             if (x >= 3)
@@ -378,5 +484,11 @@ class Ruleta extends Thread {
         }while(state==true);
     }
     
-    
+    public String getTipo(){
+        if (x==0)
+            return "Hombre Lobo";
+        else if (x==1)
+            return "Vampiro";
+        return "Necromancer";
+    }
 }

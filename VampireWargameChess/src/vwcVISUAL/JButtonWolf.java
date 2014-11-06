@@ -16,6 +16,9 @@ public class JButtonWolf extends JButtonx{
     public JButtonWolf(int r, int c, char col) {
         super(TipoPieza.HOMBRE_LOBO.hp, TipoPieza.HOMBRE_LOBO.sp,
                 TipoPieza.HOMBRE_LOBO.ap, r, c, TipoPieza.HOMBRE_LOBO.getTipo(), col);
+        
+        super.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/wolf"+Character.toLowerCase(col)+".jpg")));
+        super.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/textp.jpg")));
     }
 
     @Override

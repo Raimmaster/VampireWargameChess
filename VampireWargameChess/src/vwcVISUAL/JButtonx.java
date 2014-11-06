@@ -23,15 +23,22 @@ public class JButtonx extends JButton{
     public int row, column;
     public ArrayList<Posicion> posiciones = new ArrayList<>();
     
-    public JButtonx(){
-        super();
+    public JButtonx(String s){
+        super(s);
         sp=0;
         ap=0;
         hp=0;
+        tipo = "Vacio";
+        
+        super.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg")));
+        super.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/texts.jpg")));
+        super.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/textp.jpg")));
     }
     
+    
+    
     public JButtonx(int h, int s, int a, int r, int c, String t, char col){
-        super();
+        super(Integer.toString(r)+Integer.toString(c));
         tipo = t;
         row = r;
         column = c;
@@ -40,6 +47,7 @@ public class JButtonx extends JButton{
         ap = a;
         color = col;
         updatePosiciones(row, column);
+        
     }
     
     /**
@@ -187,5 +195,14 @@ public class JButtonx extends JButton{
     
     public  void ataqueEspecial(JButtonx p){
         
+    }
+    
+    public String getTipo(){
+        return tipo;
+    }
+    
+    public void changeCoordenadas(int x, int y){
+        row = x;
+        column = y;
     }
 }

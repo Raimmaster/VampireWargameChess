@@ -13,6 +13,9 @@ public class JButtonVampire extends JButtonx{
 
     public JButtonVampire(int r, int c, char col) {
         super(TipoPieza.VAMPIRO.hp, TipoPieza.VAMPIRO.sp, TipoPieza.VAMPIRO.ap, r, c,TipoPieza.VAMPIRO.getTipo() , col);
+        
+        super.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/vamp"+Character.toLowerCase(col)+".jpg")));
+        super.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/textp.jpg")));
     }
 
     @Override

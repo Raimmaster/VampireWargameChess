@@ -15,6 +15,10 @@ public class JButtonZombie extends JButtonx{
 
     public JButtonZombie(int c, int r, char col) {
         super(TipoPieza.ZOMBIE.hp, TipoPieza.ZOMBIE.sp,TipoPieza.ZOMBIE.ap,r,c,TipoPieza.ZOMBIE.getTipo(),col);
+        
+        super.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/zom"+Character.toLowerCase(col)+".jpg")));
+        super.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/texts.jpg")));
+        super.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/textp.jpg")));
     }
 
     @Override
