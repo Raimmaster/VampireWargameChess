@@ -22,14 +22,14 @@ public class Play extends javax.swing.JFrame implements ActionListener{
     
     private Player player1, player2;
     private Player actual = null;
-    Ruleta girar = new Ruleta();
+    private Ruleta girar = new Ruleta();
     static JButtonx[][] chess = new JButtonx[FILAS][COLUMNAS];
-    Pieza piezas [][] = new Pieza[FILAS][COLUMNAS];
-    int accion=0;
-    int clics = 0;
-    JButtonx boton1;
-    JButtonx boton2;
-    String tipoActual = "Vacio";
+    //Pieza piezas [][] = new Pieza[FILAS][COLUMNAS];
+    private int accion=0;
+    private int clics = 0;
+    private JButtonx boton1;
+    private JButtonx boton2;
+    private String tipoActual = "Vacio";
     /**
      * Creates new form Play
      */
@@ -39,9 +39,11 @@ public class Play extends javax.swing.JFrame implements ActionListener{
         player2=y;
         player1.setColor('B');
         player2.setColor('N');
+        actual = player2;
         gameInit();
         desactivarBotones();
         girar.start();
+        changePlayer();
         //inicializarPiezas();
     }
     
@@ -291,6 +293,11 @@ public class Play extends javax.swing.JFrame implements ActionListener{
         girar.detener();
         ruleta.setEnabled(false);
         tipoActual = girar.getTipo();
+        if (actual == player1) {
+                desactivarPiezas('N');
+        }else{
+                desactivarPiezas('B');
+        }
     }//GEN-LAST:event_ruletaActionPerformed
 
     private void selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectActionPerformed
@@ -361,14 +368,14 @@ public class Play extends javax.swing.JFrame implements ActionListener{
     
     private char gameOver(){
         int b = 0, n = 0;
-        for (JButton x[] : chess){
-            for (JButton y : x){
-//                if (!(y instanceof Zombie) && y != null){//obviar Zombies
-//                    if (y.getColor() == 'B')
-//                        b++;
-//                    else 
-//                        n++;
-//                }
+        for (JButtonx x[] : chess){
+            for (JButtonx y : x){
+                if (!(y instanceof JButtonZombie) && !y.getTipo().equalsIgnoreCase("Vacio")){//obviar Zombies
+                    if (y.getColor() == 'B')
+                        b++;
+                    else 
+                        n++;
+                }
             }
         }
         if (b == 0) 
@@ -454,15 +461,36 @@ public class Play extends javax.swing.JFrame implements ActionListener{
         bcrear.setEnabled(false);
         batacarz.setEnabled(false);
     }
+    
+    public void changePlayer(){
+        if (actual == player1) {
+                actual = player2;
+                desactivarPiezas('N');
+        }else{
+                actual = player1;
+                desactivarPiezas('B');
+        }
+    }
+    
+    public void desactivarPiezas(char c){
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (chess[i][j].getColor()==c)
+                    chess[i][j].setEnabled(false);
+            }
+        }
+    }
 }
 
 class Ruleta extends Thread {
-    boolean state = true;
-    int x = 0;
+    private boolean state = true;
+    private int x = 0;
     
     public void detener(){
         state = false;
         Play.activarBotones();
+        System.out.print(x);
+        
     }
     
     
@@ -485,9 +513,9 @@ class Ruleta extends Thread {
     }
     
     public String getTipo(){
-        if (x==0)
+        if (x==1)
             return "Hombre Lobo";
-        else if (x==1)
+        else if (x==2)
             return "Vampiro";
         return "Necromancer";
     }
