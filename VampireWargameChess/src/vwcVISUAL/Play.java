@@ -44,6 +44,7 @@ public class Play extends javax.swing.JFrame implements ActionListener{
         desactivarBotones();
         girar.start();
         changePlayer();
+        desactivarOpciones();
         //inicializarPiezas();
     }
     
@@ -164,8 +165,8 @@ public class Play extends javax.swing.JFrame implements ActionListener{
         jLabel3 = new javax.swing.JLabel();
         bcrear = new javax.swing.JButton();
         bmover = new javax.swing.JButton();
-        bespecial = new javax.swing.JButton();
         batacar = new javax.swing.JButton();
+        bespecial = new javax.swing.JButton();
         batacarz = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -244,25 +245,25 @@ public class Play extends javax.swing.JFrame implements ActionListener{
         jPanel1.add(bmover);
         bmover.setBounds(110, 15, 110, 30);
 
-        bespecial.setText("AT. ESPECIAL");
-        bespecial.setToolTipText("Realizar Ataque Especial [Si lo tiene]");
-        bespecial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bespecialActionPerformed(evt);
-            }
-        });
-        jPanel1.add(bespecial);
-        bespecial.setBounds(110, 55, 110, 30);
-
-        batacar.setText("ATACAR");
-        batacar.setToolTipText("Atacar a X Pieza");
+        batacar.setText("AT. ESPECIAL");
+        batacar.setToolTipText("Realizar Ataque Especial [Si lo tiene]");
         batacar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 batacarActionPerformed(evt);
             }
         });
         jPanel1.add(batacar);
-        batacar.setBounds(230, 10, 110, 20);
+        batacar.setBounds(110, 55, 110, 30);
+
+        bespecial.setText("ATACAR");
+        bespecial.setToolTipText("Atacar a X Pieza");
+        bespecial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bespecialActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bespecial);
+        bespecial.setBounds(230, 10, 110, 20);
 
         batacarz.setText("ATACAR Z.");
         batacarz.setToolTipText("Atacar con Zombie");
@@ -298,6 +299,7 @@ public class Play extends javax.swing.JFrame implements ActionListener{
         }else{
                 desactivarPiezas('B');
         }
+        desactivarOpciones();
     }//GEN-LAST:event_ruletaActionPerformed
 
     private void selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectActionPerformed
@@ -310,15 +312,15 @@ public class Play extends javax.swing.JFrame implements ActionListener{
         accion = 1;
     }//GEN-LAST:event_bmoverActionPerformed
 
-    private void batacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batacarActionPerformed
-        // TODO add your handling code here:
-        accion = 2;
-    }//GEN-LAST:event_batacarActionPerformed
-
     private void bespecialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bespecialActionPerformed
         // TODO add your handling code here:
         accion = 3;
     }//GEN-LAST:event_bespecialActionPerformed
+
+    private void batacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batacarActionPerformed
+        // TODO add your handling code here:
+        accion = 2;
+    }//GEN-LAST:event_batacarActionPerformed
 
     private void bcrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bcrearActionPerformed
         // TODO add your handling code here:
@@ -412,12 +414,13 @@ public class Play extends javax.swing.JFrame implements ActionListener{
             psp.setValue(chess[x][y].getSp());
             php.setValue(chess[x][y].getHp());
             pap.setValue(chess[x][y].getAp());
-        select.setIcon(chess[x][y].getIcon());
+            select.setIcon(chess[x][y].getIcon());
         if (clics==0 && chess[x][y].getTipo().equalsIgnoreCase(tipoActual)){
             int op = JOptionPane.showConfirmDialog(this, "Desea seleccionar esta pieza para ejecutar una accion?", "Confirmacion", JOptionPane.YES_NO_OPTION);
             if (op == JOptionPane.YES_OPTION){
                 boton1 = chess[x][y];
                 clics++;
+                activarOpciones();
             }
         }else if (clics != 0){
             int op = JOptionPane.showConfirmDialog(this, "Desea seleccionar esta pieza para ejecutar la accion seleccionada sobre ella?", "Confirmacion", JOptionPane.YES_NO_OPTION);
@@ -425,6 +428,8 @@ public class Play extends javax.swing.JFrame implements ActionListener{
                 boton2 = chess[x][y];
                 clics--;
                 desactivarBotones();
+                desactivarOpciones();
+                girar.start();
                 ruleta.setEnabled(true);
             }
         }
@@ -448,16 +453,16 @@ public class Play extends javax.swing.JFrame implements ActionListener{
     
     public void activarOpciones(){
         bmover.setEnabled(true);
-        batacar.setEnabled(true);
         bespecial.setEnabled(true);
+        batacar.setEnabled(true);
         bcrear.setEnabled(true);
         batacarz.setEnabled(true);
     }
     
     public void desactivarOpciones(){
         bmover.setEnabled(false);
-        batacar.setEnabled(false);
         bespecial.setEnabled(false);
+        batacar.setEnabled(false);
         bcrear.setEnabled(false);
         batacarz.setEnabled(false);
     }
