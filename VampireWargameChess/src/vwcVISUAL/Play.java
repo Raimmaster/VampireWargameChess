@@ -8,6 +8,7 @@ package vwcVISUAL;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import vwc.*;
@@ -17,6 +18,7 @@ import vwc.*;
  * @author KELVIN
  */
 public class Play extends javax.swing.JFrame implements ActionListener{
+    
     private static final int COLUMNAS = 6;
     private static final int FILAS = 6;
     
@@ -25,7 +27,7 @@ public class Play extends javax.swing.JFrame implements ActionListener{
     private Ruleta girar = new Ruleta();
     static JButtonx[][] chess = new JButtonx[FILAS][COLUMNAS];
     //Pieza piezas [][] = new Pieza[FILAS][COLUMNAS];
-    private int accion=0;
+    public static int accion=0;
     private int clics = 0;
     private JButtonx boton1;
     private JButtonx boton2;
@@ -113,10 +115,6 @@ public class Play extends javax.swing.JFrame implements ActionListener{
         
     }
     
-//    public void chess[0][0]ActionPerformed(java.awt.event.ActionEvent evt){
-//        
-//    }
-    
     private void inicializarPiezas(){
         //Ciclo para inicializar las piezas correctamente
         for(int i = 0; i < FILAS; i += 5){
@@ -129,16 +127,13 @@ public class Play extends javax.swing.JFrame implements ActionListener{
             for(int j = 0; j < COLUMNAS; j++){
                 if(j == 0 || j == 5){
                     chess[i][j] = new JButtonWolf(i,j,colour);
-                    chess[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/wolf"+colour+".jpg")));
                     chess[i][j].setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/wolf"+colour+".jpg")));
                 }else if( j == 1 || j == 4)
                 {
                     chess[i][j] = new JButtonVampire(i,j,colour);
-                    chess[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/vamp"+colour+".jpg")));
                     chess[i][j].setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/vamp"+colour+".jpg")));
                 }else if(j == 2 || j == 3){
                     chess[i][j] = new JButtonNecromancer(i,j,colour);
-                    chess[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/reap"+colour+".jpg")));
                     chess[i][j].setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/reap"+colour+".jpg")));
                 }
             }
@@ -171,7 +166,7 @@ public class Play extends javax.swing.JFrame implements ActionListener{
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("GameBoard");
         setPreferredSize(new java.awt.Dimension(625, 630));
         getContentPane().setLayout(null);
@@ -245,7 +240,7 @@ public class Play extends javax.swing.JFrame implements ActionListener{
         jPanel1.add(bmover);
         bmover.setBounds(110, 15, 110, 30);
 
-        batacar.setText("AT. ESPECIAL");
+        batacar.setText("ATACAR");
         batacar.setToolTipText("Realizar Ataque Especial [Si lo tiene]");
         batacar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,7 +250,7 @@ public class Play extends javax.swing.JFrame implements ActionListener{
         jPanel1.add(batacar);
         batacar.setBounds(110, 55, 110, 30);
 
-        bespecial.setText("ATACAR");
+        bespecial.setText("AT. ESPECIAL");
         bespecial.setToolTipText("Atacar a X Pieza");
         bespecial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,12 +289,14 @@ public class Play extends javax.swing.JFrame implements ActionListener{
         girar.detener();
         ruleta.setEnabled(false);
         tipoActual = girar.getTipo();
+        System.out.print(tipoActual);
+        
+        activarBotones();
         if (actual == player1) {
                 desactivarPiezas('N');
         }else{
                 desactivarPiezas('B');
         }
-        desactivarOpciones();
     }//GEN-LAST:event_ruletaActionPerformed
 
     private void selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectActionPerformed
@@ -310,26 +307,66 @@ public class Play extends javax.swing.JFrame implements ActionListener{
     private void bmoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bmoverActionPerformed
         // TODO add your handling code here:
         accion = 1;
+        activarBotones();
+        if (actual == player1) {
+                desactivarPiezas('N');
+        }else{
+                desactivarPiezas('B');
+        }
     }//GEN-LAST:event_bmoverActionPerformed
 
     private void bespecialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bespecialActionPerformed
         // TODO add your handling code here:
         accion = 3;
+        
+        activarBotones();
+        if (actual == player1) {
+                desactivarPiezas('N');
+        }else{
+                desactivarPiezas('B');
+        }
     }//GEN-LAST:event_bespecialActionPerformed
 
     private void batacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batacarActionPerformed
         // TODO add your handling code here:
         accion = 2;
+        
+        activarBotones();
+        if (actual == player1) {
+                desactivarPiezas('N');
+        }else{
+                desactivarPiezas('B');
+        }
     }//GEN-LAST:event_batacarActionPerformed
 
     private void bcrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bcrearActionPerformed
         // TODO add your handling code here:
-        accion = 4;
+        JButtonx buscarx = buscar("Necromancer");
+        if (buscarx != null){
+            accion = 4;
+            desactivarPiezas('B');
+            desactivarPiezas('N');
+            JOptionPane.showMessageDialog(this, "Seleccione la posicion donde desea crear Zombie", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            clics++;
+            
+            activarBotones();
+            if (actual == player1) {
+                    desactivarPiezas('N');
+            }else{
+                    desactivarPiezas('B');
+            }
+        }
     }//GEN-LAST:event_bcrearActionPerformed
 
     private void batacarzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batacarzActionPerformed
         // TODO add your handling code here:
         accion = 5;
+        
+        if (actual == player1) {
+                desactivarPiezas('N');
+        }else{
+                desactivarPiezas('B');
+        }
     }//GEN-LAST:event_batacarzActionPerformed
 
     /**
@@ -362,7 +399,7 @@ public class Play extends javax.swing.JFrame implements ActionListener{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Play(new Player(""),new Player("")).setVisible(true);
+                new Play(new Player("NxR"),new Player("RAIM")).setVisible(true);
                 
             }
         });
@@ -411,27 +448,73 @@ public class Play extends javax.swing.JFrame implements ActionListener{
         String coord = e.getActionCommand();
         int x = coord.charAt(0) - 48;
         int y = coord.charAt(1) - 48;
+        JButtonx este = chess[x][y];
+            
+            System.out.println(x + " - " + y);
+            //chess[x][y].printPosiblesPosiciones();
+            
             psp.setValue(chess[x][y].getSp());
             php.setValue(chess[x][y].getHp());
             pap.setValue(chess[x][y].getAp());
-            select.setIcon(chess[x][y].getIcon());
+            select.setIcon(este.getIcon());
+            
         if (clics==0 && chess[x][y].getTipo().equalsIgnoreCase(tipoActual)){
             int op = JOptionPane.showConfirmDialog(this, "Desea seleccionar esta pieza para ejecutar una accion?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+            
             if (op == JOptionPane.YES_OPTION){
                 boton1 = chess[x][y];
                 clics++;
                 activarOpciones();
+                desactivarBotones();
             }
-        }else if (clics != 0){
+            
+        }else if (clics == 1){
             int op = JOptionPane.showConfirmDialog(this, "Desea seleccionar esta pieza para ejecutar la accion seleccionada sobre ella?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+            
             if (op == JOptionPane.YES_OPTION){
                 boton2 = chess[x][y];
+                
+                if (accion == 1){
+                    
+                    if (boton1.validarMovimiento(x,y) && boton2.getHp()==0){
+                        int f, c;
+                        f = boton1.getRow();
+                        c = boton1.getColumn();
+                        Icon image = boton1.getIcon();
+                        Icon image2 = boton2.getIcon();
+                        
+                        chess[x][y] = boton1;
+                        boton2.setIcon(image);
+                        boton2 = null;
+                        
+                        chess[f][c] = boton2;
+                        boton1.setIcon(image2);
+                        chess[f][c] = new JButtonx(Integer.toString(f)+Integer.toString(c));
+                        chess[x][y].setIcon(image);
+                        boton1.setIcon(image2);
+                        boton1 = null;
+                        chess[x][y].updatePosiciones(x, y);
+                        
+                        System.out.print("Pieza Movida");
+                    }
+                }else if (accion == 2){
+                    
+                }else if (accion == 3){
+                    
+                }else if (accion ==4){
+                    
+                }else if (accion == 5){
+                    
+                }
+                    
                 clics--;
-                desactivarBotones();
-                desactivarOpciones();
-                girar.start();
+                
+                girarRuleta();
                 ruleta.setEnabled(true);
+                accion = 0;
+                tipoActual = "ninguno";
             }
+            
         }
     }
     
@@ -485,6 +568,32 @@ public class Play extends javax.swing.JFrame implements ActionListener{
             }
         }
     }
+    
+    public JButtonx buscar(String tipo){
+        JButtonx buscar = null;
+        for (JButtonx bx[] : chess){
+            for (JButtonx by : bx){
+                if (by.getTipo().equalsIgnoreCase(tipo))
+                    buscar = by;
+            }
+        }
+        return buscar;
+    }
+    
+    public void girarRuleta(){
+        girar = new Ruleta();
+        girar.start();
+    }
+    
+    public void moverPieza(JButtonx e, int x, int y){
+        chess[x][y] = e;
+        chess[x][y].setIcon(e.getIcon());
+        chess[x][y].updatePosiciones(x, y);
+        int f, c;
+        f = e.getRow();
+        c = e.getColumn();
+        chess[f][c] = new JButtonx(Integer.toString(f)+Integer.toString(c));
+    }
 }
 
 class Ruleta extends Thread {
@@ -492,16 +601,15 @@ class Ruleta extends Thread {
     private int x = 0;
     
     public void detener(){
-        state = false;
-        Play.activarBotones();
+        state = false;;
+        Play.desactivarBotones();
         System.out.print(x);
         
     }
     
-    
     public void run(){
         
-        do{
+        while(state==true){
             if (x==0){
                 Play.ruleta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/wolfb.jpg")));
                 x++;
@@ -514,14 +622,21 @@ class Ruleta extends Thread {
             }
             if (x >= 3)
                 x=0;
-        }while(state==true);
+        }
     }
     
     public String getTipo(){
+        try {
+            Thread.sleep (1000);
+        } catch (Exception e) {
+            // Mensaje en caso de que falle
+        }
         if (x==1)
             return "Hombre Lobo";
         else if (x==2)
             return "Vampiro";
         return "Necromancer";
     }
+    
+    
 }

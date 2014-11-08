@@ -42,7 +42,7 @@ public class JButtonZombie extends JButtonx{
     }
     
     @Override
-    public boolean mover(int fila, int mover){
-        return false;
+    public void mover(int fila, int mover){
+        
     }
 }

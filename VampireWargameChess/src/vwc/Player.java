@@ -58,4 +58,8 @@ public class Player {
         else
             return 1;
     }
+    
+    public String toString(){
+        return name;
+    }
 }

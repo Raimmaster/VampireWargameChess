@@ -30,9 +30,9 @@ public class JButtonx extends JButton{
         hp=0;
         tipo = "Vacio";
         
-        super.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg")));
-        super.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/texts.jpg")));
-        super.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/textp.jpg")));
+        setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/text.jpg")));
+        setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/texts.jpg")));
+        setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/textp.jpg")));
     }
     
     
@@ -77,18 +77,9 @@ public class JButtonx extends JButton{
      * @param columna Número de la columna donde nos queremos mover
      * @return <code>true</code> si se puede mover
      */
-    public boolean mover (int fila, int columna){
-        boolean state = false;
-        if (validarPosicion(fila,columna)){
-            for (Posicion x : posiciones){
-                if (x.validarPosicion(fila, columna)){
-                    state = true;
-                    //codigo para mover la pieza
-                    updatePosiciones(fila, columna);
-                }
-            }
-        }         
-        return state;
+    public void mover (int fila, int columna){
+        row = fila;
+        column = columna;
     }
     
     /**
@@ -115,10 +106,11 @@ public class JButtonx extends JButton{
     public boolean validarMovimiento(int fila, int columna){
         boolean state = false;
         for (Posicion x : posiciones){
-                if (x.validarPosicion(fila, columna) == true){
+                if (x.getX() == fila && x.getY() == columna){
                     state = true;
                 }
         }
+        System.out.print(state);
         return state;
     }
     
@@ -128,6 +120,7 @@ public class JButtonx extends JButton{
      * @param columna 
      */
     public void updatePosiciones(int fila, int columna){
+        posiciones.clear();
         if (fila < 5){
             posiciones.add(new Posicion(fila + 1, columna));
             if (columna > 0)
@@ -204,5 +197,19 @@ public class JButtonx extends JButton{
     public void changeCoordenadas(int x, int y){
         row = x;
         column = y;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+    
+    public void printPosiblesPosiciones(){
+        for (Posicion x : posiciones){
+                System.out.println(x.getX() + "-" + x.getY());
+        }
     }
 }
