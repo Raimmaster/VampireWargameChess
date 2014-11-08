@@ -36,28 +36,36 @@ public class Wolf extends Pieza {
     
     @Override
     public void updatePosiciones(int fila, int columna){
+        updatePosiciones(fila, columna, 1);
+    }
+    
+    //Overload - RECURSIVA
+    private void updatePosiciones(int fila, int columna, int adjPositions){
         final int LIMIT_SUP = 6, LIMIT_INF = -1;//LIMITES DEL BOARD
-        for(int i = 1; i <= 2; i++){
-            if (fila < LIMIT_SUP - i){
-                posiciones.add(new Posicion(fila + i, columna));
-                if (columna > LIMIT_INF + i)
+        if(adjPositions <= 2){
+            if (fila < LIMIT_SUP - adjPositions){
+                posiciones.add(new Posicion(fila + adjPositions, columna));
+                if (columna > LIMIT_INF + adjPositions)
                     posiciones.add(new Posicion(fila + 1, columna - 1));
-                if (columna < LIMIT_SUP - i)
+                if (columna < LIMIT_SUP - adjPositions)
                     posiciones.add(new Posicion(fila + 1, columna + 1));
             }
-            if (fila > LIMIT_INF + i){
+            if (fila > LIMIT_INF + adjPositions){
                 posiciones.add(new Posicion(fila - 1, columna));
-                if (columna > LIMIT_INF + i)
+                if (columna > LIMIT_INF + adjPositions)
                     posiciones.add(new Posicion(fila - 1, columna - 1));
-                if (columna < LIMIT_SUP - i)
+                if (columna < LIMIT_SUP - adjPositions)
                     posiciones.add(new Posicion(fila - 1, columna + 1));
             }
-            if (columna > LIMIT_INF + i)
+            if (columna > LIMIT_INF + adjPositions)
                 posiciones.add(new Posicion(fila, columna - 1));
-            if (columna < LIMIT_SUP - i)
+            if (columna < LIMIT_SUP - adjPositions)
                 posiciones.add(new Posicion(fila, columna + 1));
-        }        
+            
+            updatePosiciones(fila, columna, adjPositions + 1);
+        }  
     }
+    
 
     @Override
     public int cantOpciones() {
