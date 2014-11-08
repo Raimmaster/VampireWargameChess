@@ -33,6 +33,31 @@ public class Wolf extends Pieza {
         
         return q;
     }
+    
+    @Override
+    public void updatePosiciones(int fila, int columna){
+        final int LIMIT_SUP = 6, LIMIT_INF = -1;//LIMITES DEL BOARD
+        for(int i = 1; i <= 2; i++){
+            if (fila < LIMIT_SUP - i){
+                posiciones.add(new Posicion(fila + i, columna));
+                if (columna > LIMIT_INF + i)
+                    posiciones.add(new Posicion(fila + 1, columna - 1));
+                if (columna < LIMIT_SUP - i)
+                    posiciones.add(new Posicion(fila + 1, columna + 1));
+            }
+            if (fila > LIMIT_INF + i){
+                posiciones.add(new Posicion(fila - 1, columna));
+                if (columna > LIMIT_INF + i)
+                    posiciones.add(new Posicion(fila - 1, columna - 1));
+                if (columna < LIMIT_SUP - i)
+                    posiciones.add(new Posicion(fila - 1, columna + 1));
+            }
+            if (columna > LIMIT_INF + i)
+                posiciones.add(new Posicion(fila, columna - 1));
+            if (columna < LIMIT_SUP - i)
+                posiciones.add(new Posicion(fila, columna + 1));
+        }        
+    }
 
     @Override
     public int cantOpciones() {
