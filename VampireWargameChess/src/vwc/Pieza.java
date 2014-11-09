@@ -68,18 +68,8 @@ public abstract class Pieza {
      * @param columna Número de la columna donde nos queremos mover
      * @return <code>true</code> si se puede mover
      */
-    public boolean mover (int fila, int columna){
-        boolean state = false;
-        if (validarPosicion(fila,columna)){
-            for (Posicion x : posiciones){
-                if (x.validarPosicion(fila, columna)){
-                    state = true;
-                    //codigo para mover la pieza
-                    updatePosiciones(fila, columna);
-                }
-            }
-        }         
-        return state;
+    public boolean mover (int fila, int columna){           
+        return validarMovimiento(fila, columna);
     }
     
     /**
@@ -106,7 +96,7 @@ public abstract class Pieza {
     public boolean validarMovimiento(int fila, int columna){
         boolean state = false;
         for (Posicion x : posiciones){
-                if (x.validarPosicion(fila, columna) == true){
+                if (x.getX() == fila && x.getY() == columna){
                     state = true;
                 }
         }

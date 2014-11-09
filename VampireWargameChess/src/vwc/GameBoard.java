@@ -24,8 +24,8 @@ public final class GameBoard {
     private Player actual = null;
         
     public GameBoard(Player x, Player y){
-        String tipoActual = null, opcion, piezaRul;
-        int ruleta = 0, cantGiros;
+        String tipoActual = null, piezaRul;
+        int cantGiros;
         
         gameInit();
         x.setColor('B');
@@ -37,7 +37,7 @@ public final class GameBoard {
             printGameBoard();
 
             cantGiros = actual.getCantGiros();
-            System.out.println("\nTurno del jugador: " + actual.getName());
+            System.out.println("\n\nTurno del jugador: " + actual.getName());
             cantGiros--;            
             tipoActual = showPiezaActual(girarRuleta());//OBTENER EL NOMBRE DE LA PIEZA A MOVER         
             System.out.print("Tipo a mover: " + tipoActual);
@@ -46,13 +46,15 @@ public final class GameBoard {
             //Validar las coordenadas de la pieza seleccionada
             validarPiezaSeleccionada(piezaRul);            
             finish = gameOver();
-            if (actual == x) 
-                actual = y;
-            else
-                actual = x;
+            actual = actual == x ? y : x;
         }while(finish == 'X' || cantGiros > 0);
     }
     
+    /**
+     * Obtiene el String de la pieza actual a usar
+     * @param tipo Número de la ruleta que determina el tipo
+     * @return Tipo de Pieza (e.g. Vampiro)
+     */
     public String showPiezaActual(int tipo){        
         switch(tipo){
             case 1:
@@ -66,6 +68,10 @@ public final class GameBoard {
         }
     }
     
+    /**
+     * Valida las coordenadas de la pieza a usarse
+     * @param piezaRul El nombre de la pieza a usarse
+     */
     public void validarPiezaSeleccionada(String piezaRul){
         boolean state = false;
         int fila, columna;
@@ -82,8 +88,18 @@ public final class GameBoard {
                 if (piezas[fila][columna].equalsIgnoreCase(piezaRul))
                     state = true;
         }while(!state);
+        accionarPieza(fila, columna);
     }
     
+    public void accionarPieza(int fila, int columna){
+        Pieza p = chess[fila][columna];
+        p.submenu();
+        
+    }
+    
+    /**
+     * Inicializa en _ las posiciones del board
+     */
     private void gameInit(){
         for (int i = 0; i < FILAS; i++) {
             for (int j = 0; j < COLUMNAS; j++) {
@@ -94,6 +110,9 @@ public final class GameBoard {
         inicializarPiezas();
     }
     
+    /**
+     * Inicializa las piezas en sus posiciones iniciales
+     */
     private void inicializarPiezas(){
         //Ciclo para inicializar las piezas correctamente
         for(int i = 0; i < FILAS; i += 5){
@@ -119,6 +138,11 @@ public final class GameBoard {
         }
     }
     
+    /**
+     * Determina si el jugador contrario no tiene piezas
+     * estableciendo el fin de juego
+     * @return 
+     */
     private char gameOver(){
         int b = 0, n = 0;
         for (Pieza x[] : chess){
@@ -138,8 +162,11 @@ public final class GameBoard {
         return 'X';
     }
     
+    /**
+     * Imprime el tablero
+     */
     private void printGameBoard(){
-        System.out.print("\t***0**1**2**3**4**5***\n\t*");
+        System.out.print("\n\t***0**1**2**3**4**5***\n\t*");
         for (int i = 0; i < FILAS; i++) {
             for (int j = 0; j < COLUMNAS; j++) {
                 System.out.print(" " + piezas[i][j]);
@@ -148,7 +175,11 @@ public final class GameBoard {
         }
         System.out.print("**0**1**2**3**4**5***");
     }
-        
+     
+    /**
+     * Obtiene el número de la pieza a usar
+     * @return int Random de la pieza
+     */
     private int girarRuleta(){
         return rnd.nextInt(3)+1;
     }
