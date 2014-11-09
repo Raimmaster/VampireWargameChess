@@ -17,7 +17,7 @@ import vwc.Player;
  */
 public class Battleground {
     static ArrayList<Player> players = new ArrayList<>();
-    static String lastTen[] = new String[10];
+    static ArrayList<String> lastTen = new ArrayList<>();
     static Scanner rd = new Scanner(System.in);
     
     public static void main(String[] args) {
@@ -43,7 +43,8 @@ public class Battleground {
                         jugadores[i] = initializePlayer(i + 1);
                         jugadores[i].resetPiezasPerdidas();
                     }
-                    vampireChess.playGame(jugadores[0], jugadores[1]);
+                    lastTen.add(0,vampireChess.playGame(jugadores[0], jugadores[1]));
+                    onlyTen();
                     break;
                 case 2://RANKING
                     break;
@@ -88,11 +89,35 @@ public class Battleground {
     }
     
     private static int getNextPosVacia(){
-        for(int i = 0; i < lastTen.length; i++){
-            if(lastTen[i] == null)
+        for(int i = 0; i < lastTen.size(); i++){
+            if(lastTen.get(i) == null)
                 return i;
         }
         return -1;
     }    
     
+    private static void onlyTen(){
+        if (lastTen.size()>10){
+            for (int i = 9; i < lastTen.size()-1; i++) {
+                lastTen.remove(i);
+            }
+        }
+    }
+    
+    public static void addPoints(Player x){
+        x.addpoints();
+        updateRanking(x, 0);
+    }
+    
+    private static void updateRanking(Player x, int y){
+        if (players.size() > 1){
+            if (players.get(y).getPoints() < x.getPoints()){
+                players.add(y, x);
+                players.remove(x);
+                return;
+            }else
+                updateRanking(x, y+1);
+                
+        }
+    }
 }
