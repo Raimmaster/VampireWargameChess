@@ -23,7 +23,7 @@ public class Necromancer extends Pieza{
                 + "2. Atacar\n"
                 + "3. Ataque Especial\n"
                 + "4. Conjurar Zombie\n"
-                + "5. Atacar con Zombie\n");
+                + "5. Atacar con Zombie\nIngrese su opcion:");
     }
 
     @Override

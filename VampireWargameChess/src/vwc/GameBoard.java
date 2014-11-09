@@ -14,7 +14,7 @@ import java.util.Scanner;
  * @author KELVIN
  */
 public final class GameBoard {
-    private static Scanner rd = new Scanner(System.in);
+    private static final Scanner rd = new Scanner(System.in);
     private static Random rnd = new Random();
     private static final int COLUMNAS = 6;
     private static final int FILAS = 6;
@@ -48,7 +48,7 @@ public final class GameBoard {
             piezaRul = Character.toString(tipoActual.charAt(0)) + Character.toString(actual.getColor());            
             //Validar las coordenadas de la pieza seleccionada
             Pieza jugador = validarPiezaSeleccionada(piezaRul);       
-            
+            jugador.submenu();
             finish = gameOver();
             actual = actual == x ? y : x;
         }while(finish == 'X' || cantGiros > 0);
@@ -108,9 +108,13 @@ public final class GameBoard {
         return chess[fila][columna];
     }
     
-    private void accionarPieza(int fila, int columna){
-        Pieza p = chess[fila][columna];
-        p.submenu();        
+    private void accionarPieza(Pieza p){
+        p.submenu();
+        int eleccion = rd.nextInt();
+        switch(eleccion){
+            case 1:
+                //p.mover(, FILAS);
+        }
     }
     
     /**

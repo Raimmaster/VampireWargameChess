@@ -72,7 +72,8 @@ public abstract class Pieza {
         if(validarMovimiento(fila, columna)){
             row = fila;
             column = columna;            
-        }
+        }else
+            System.out.println("COORDENADAS INVALIDAS.");
     }
     
     /**
