@@ -19,11 +19,11 @@ public class Necromancer extends Pieza{
     @Override
     public void submenu() {
         System.out.printf("Acciones Necromancer: %n "
-                + "1. Mover"
-                + "2. Atacar"
-                + "3. Ataque Especial"
-                + "4. Conjurar Zombie"
-                + "5. Atacar con Zombie");
+                + "1. Mover\n"
+                + "2. Atacar\n"
+                + "3. Ataque Especial\n"
+                + "4. Conjurar Zombie\n"
+                + "5. Atacar con Zombie\n");
     }
 
     @Override

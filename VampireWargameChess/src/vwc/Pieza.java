@@ -109,6 +109,7 @@ public abstract class Pieza {
      * @param columna 
      */
     public void updatePosiciones(int fila, int columna){
+        posiciones.clear();
         if (fila < 5){
             posiciones.add(new Posicion(fila + 1, columna));
             if (columna > 0)

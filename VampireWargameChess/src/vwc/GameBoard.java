@@ -93,8 +93,7 @@ public final class GameBoard {
     
     public void accionarPieza(int fila, int columna){
         Pieza p = chess[fila][columna];
-        p.submenu();
-        
+        p.submenu();        
     }
     
     /**

@@ -18,7 +18,7 @@ public class Wolf extends Pieza {
 
     @Override
     public void submenu() {      
-        System.out.printf("Acciones Vampiro: %n "
+        System.out.printf("Acciones Vampiro: %n"
                 + "1. Mover\n"
                 + "2. Atacar\n");
     }
@@ -37,6 +37,7 @@ public class Wolf extends Pieza {
     
     @Override
     public void updatePosiciones(int fila, int columna){
+        posiciones.clear();
         updatePosiciones(fila, columna, 1);
     }
     
