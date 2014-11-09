@@ -138,14 +138,14 @@ public final class GameBoard {
     }
     
     private void printGameBoard(){
-        System.out.print("\t**********************\n\t*");
+        System.out.print("\t***0**1**2**3**4**5***\n\t*");
         for (int i = 0; i < FILAS; i++) {
             for (int j = 0; j < COLUMNAS; j++) {
                 System.out.print(" " + piezas[i][j]);
             }
             System.out.printf("  %d\n\t*", i);
         }
-        System.out.println("*********************");
+        System.out.print("**0**1**2**3**4**5***");
     }
         
     private int girarRuleta(){
