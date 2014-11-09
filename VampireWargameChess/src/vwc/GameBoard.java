@@ -23,11 +23,14 @@ public final class GameBoard {
     private String piezas[][] = new String[FILAS][COLUMNAS];
     private Player actual = null;
         
-    public GameBoard(Player x, Player y){
-        String tipoActual = null, piezaRul;
+    public GameBoard(){               
+        gameInit();        
+    }
+    
+    public String playGame(Player x, Player y){
+        String tipoActual, piezaRul;
         int cantGiros;
         
-        gameInit();
         x.setColor('B');
         y.setColor('N');
         actual = x;
@@ -44,10 +47,11 @@ public final class GameBoard {
             //elegir el tipo de pieza que se puede usar          
             piezaRul = Character.toString(tipoActual.charAt(0)) + Character.toString(actual.getColor());            
             //Validar las coordenadas de la pieza seleccionada
-            validarPiezaSeleccionada(piezaRul);            
+            Pieza jugador = validarPiezaSeleccionada(piezaRul);            
             finish = gameOver();
             actual = actual == x ? y : x;
         }while(finish == 'X' || cantGiros > 0);
+        return null;
     }
     
     /**
@@ -55,7 +59,7 @@ public final class GameBoard {
      * @param tipo Número de la ruleta que determina el tipo
      * @return Tipo de Pieza (e.g. Vampiro)
      */
-    public String showPiezaActual(int tipo){        
+    private String showPiezaActual(int tipo){        
         switch(tipo){
             case 1:
                 return "Hombre Lobo";
@@ -72,7 +76,7 @@ public final class GameBoard {
      * Valida las coordenadas de la pieza a usarse
      * @param piezaRul El nombre de la pieza a usarse
      */
-    public void validarPiezaSeleccionada(String piezaRul){
+    private Pieza validarPiezaSeleccionada(String piezaRul){
         boolean state = false;
         int fila, columna;
         do{
@@ -88,10 +92,11 @@ public final class GameBoard {
                 if (piezas[fila][columna].equalsIgnoreCase(piezaRul))
                     state = true;
         }while(!state);
-        accionarPieza(fila, columna);
+        
+        return chess[fila][columna];
     }
     
-    public void accionarPieza(int fila, int columna){
+    private void accionarPieza(int fila, int columna){
         Pieza p = chess[fila][columna];
         p.submenu();        
     }

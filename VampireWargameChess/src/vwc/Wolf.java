@@ -68,7 +68,6 @@ public class Wolf extends Pieza {
         }  
     }
     
-
     @Override
     public int cantOpciones() {
         return 2;
