@@ -16,13 +16,11 @@ import java.util.Scanner;
 public class Battleground {
     static ArrayList<Player> players = new ArrayList<>();
     static Player topTen[] = new Player[10];
+    static Scanner rd = new Scanner(System.in);
     
     public static void main(String[] args) {
-        Scanner rd = new Scanner(System.in);
         Random rnd = new Random();
-        Player player1 = null;
-        Player player2 = null;
-        String jug1, jug2, opcion;
+        Player [] jugadores = new Player[2];
         
         System.out.println("\033[32m   ******");
         System.out.println("\033[32m ***");
@@ -30,41 +28,32 @@ public class Battleground {
         System.out.println("\033[32m ***");
         System.out.println("\033[32m   ******");
         
+        for(int i = 0; i < 2; i++){
+            jugadores[i] = initializePlayer(i + 1);
+            jugadores[i].resetPiezasPerdidas();
+        }        
+        GameBoard nx = new GameBoard(jugadores[0], jugadores[1]);         
+    }   
+    
+    public static Player initializePlayer(int i){
+        Player player = null;
+        String gamer, op;
         do{
-            System.out.print("Ingrese nombre de Player1: ");
-            jug1 = rd.next();
-            player1 = existe(jug1);
-            if (player1 == null){
-                player1 = new Player(jug1);
-                players.add(player1);
+            System.out.print("Ingrese nombre de Player " + i + ": ");
+            gamer = rd.next();
+            player = existe(gamer);
+            if (player == null){
+                player = new Player(gamer);
+                players.add(player);
             }else{
                 System.out.print("Ya existe jugador, desea usarlo? (Si/No)");
-                opcion = rd.next();
-                if (opcion.equalsIgnoreCase("no"))
-                    player1 = null;
+                op = rd.next();
+                if (op.equalsIgnoreCase("no"))
+                    player = null;
             }
-        }while(player1 == null);
-        //System.out.print("Paso a player2\n");            
-        do{
-            System.out.print("Ingrese nombre de Player2: ");
-            jug2 = rd.next();
-            player2 = existe(jug2);
-            if (player2 == null){
-                player2 = new Player(jug2);
-                players.add(player1);
-            }else{
-                System.out.print("Ya existe jugador, desea usarlo? (Si/No)");
-                opcion = rd.next();
-                if (opcion.equalsIgnoreCase("no"))
-                    player2 = null;
-            }
-        }while(player2 == null);    
-        //RESET PIEZAS PERDIDAS A 0
-        player1.resetPiezasPerdidas();
-        player2.resetPiezasPerdidas();
-        //System.out.print("Termino player2\n");
-        GameBoard nx = new GameBoard(player1, player2);       
+        }while(player == null);
         
+        return player;
     }
     
     private static Player existe(String n){

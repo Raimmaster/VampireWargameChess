@@ -22,44 +22,54 @@ public final class GameBoard {
     private Pieza chess[][] = new Pieza[FILAS][COLUMNAS];
     private String piezas[][] = new String[FILAS][COLUMNAS];
     private Player actual = null;
-    
-    
-    public GameBoard(){
-        gameInit();
-        printGameBoard();
-    }
-    
+        
     public GameBoard(Player x, Player y){
         String tipoActual = null, opcion, piezaRul;
-        int ruleta = 0, cantGiros, fila, columna;
+        int ruleta = 0, cantGiros;
         
         gameInit();
-        printGameBoard();
         x.setColor('B');
         y.setColor('N');
         actual = x;
         char finish;
-        do{            
-            boolean state = false;
+        do{//JUEGO - TODO LO NECESARIO            
             //Girando la ruleta
+            printGameBoard();
+
             cantGiros = actual.getCantGiros();
             System.out.println("\nTurno del jugador: " + actual.getName());
-            
-            ruleta = girarRuleta();
-            cantGiros--;
-                               
-            if (ruleta == 1)            
-                tipoActual = "Hombre Lobo";                
-            else if (ruleta == 2)            
-                tipoActual = "Vampiro";                
-            else            
-                tipoActual = "Necromancer";
+            cantGiros--;            
+            tipoActual = showPiezaActual(girarRuleta());//OBTENER EL NOMBRE DE LA PIEZA A MOVER         
             System.out.print("Tipo a mover: " + tipoActual);
-
             //elegir el tipo de pieza que se puede usar          
             piezaRul = Character.toString(tipoActual.charAt(0)) + Character.toString(actual.getColor());            
-            //Ingreso de coordenadas
-            do{
+            //Validar las coordenadas de la pieza seleccionada
+            validarPiezaSeleccionada(piezaRul);            
+            finish = gameOver();
+            if (actual == x) 
+                actual = y;
+            else
+                actual = x;
+        }while(finish == 'X' || cantGiros > 0);
+    }
+    
+    public String showPiezaActual(int tipo){        
+        switch(tipo){
+            case 1:
+                return "Hombre Lobo";
+            case 2:
+                return "Vampiro";
+            case 3:
+                return "Necromancer";
+            default:
+                return null;
+        }
+    }
+    
+    public void validarPiezaSeleccionada(String piezaRul){
+        boolean state = false;
+        int fila, columna;
+        do{
                 do{
                     System.out.print("\nIngrese fila de pieza: ");
                     fila = rd.nextInt();
@@ -71,16 +81,7 @@ public final class GameBoard {
                 
                 if (piezas[fila][columna].equalsIgnoreCase(piezaRul))
                     state = true;
-            }while(!state);
-            
-            finish = gameOver();
-            if (actual == x) 
-                actual = y;
-            else
-                actual = x;
-        }while(finish == 'X' || cantGiros > 0);
-            
-            //}while(cantGiros > 0);
+        }while(!state);
     }
     
     private void gameInit(){

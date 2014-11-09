@@ -35,17 +35,24 @@ public class Necromancer extends Pieza{
     @Override
     public Pieza llamar(int opcion, Pieza p, int fila, int columna) {
         Pieza q = null;
-        if (opcion==1)
-            mover(fila, columna);
-        if (opcion==2)
-            p.defender(ap);
-        if (opcion==3)
-            ataqueEspecial(p);
-        if (opcion==4)
-            //Crear Zombie
-            System.out.print("");
-        if (opcion==5)
-            p.defender(TipoPieza.ZOMBIE.ap);   
+        switch(opcion){
+            case 1:
+                mover(fila, columna);
+                break;
+            case 2:         
+                p.defender(ap);
+                break;
+            case 3:            
+                ataqueEspecial(p);
+                break;
+            case 4:
+                //Crear Zombie
+                System.out.print("");
+                break;
+            case 5:       
+                p.defender(TipoPieza.ZOMBIE.ap);                   
+                break;
+        }
         return q;
     }
 
