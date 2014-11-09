@@ -47,7 +47,8 @@ public final class GameBoard {
             //elegir el tipo de pieza que se puede usar          
             piezaRul = Character.toString(tipoActual.charAt(0)) + Character.toString(actual.getColor());            
             //Validar las coordenadas de la pieza seleccionada
-            Pieza jugador = validarPiezaSeleccionada(piezaRul);            
+            Pieza jugador = validarPiezaSeleccionada(piezaRul);       
+            
             finish = gameOver();
             actual = actual == x ? y : x;
         }while(finish == 'X' || cantGiros > 0);

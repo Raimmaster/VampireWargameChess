@@ -45,7 +45,7 @@ public abstract class Pieza {
      * Realiza la acción necesaria de ataque
      * @param p Objeto Pieza que se quiere atacar
      */
-    public void atacar(Pieza p){
+    public final void atacar(Pieza p){
         p.defender(ap);
     }
     
@@ -79,7 +79,7 @@ public abstract class Pieza {
      * Recibir el dano ocasionado por x pieza
      * @param ap Cantidad de dano inflingido
      */
-    public void defender(int ap){
+    public final void defender(int ap){
         if (sp > 0 && ap > 0){
             sp--;
             defender(ap - 1);
