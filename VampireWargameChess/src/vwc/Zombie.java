@@ -37,7 +37,7 @@ public class Zombie extends Pieza{
     }
     
     @Override
-    public boolean mover(int fila, int mover){
-        return false;
+    public void mover(int fila, int mover){
+        System.out.print("CEREBROS......");
     }
 }

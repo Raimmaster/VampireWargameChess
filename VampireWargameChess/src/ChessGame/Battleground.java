@@ -23,7 +23,7 @@ public class Battleground {
     public static void main(String[] args) {
         Random rnd = new Random();
         Player [] jugadores = new Player[2];
-        byte opcion = 0;        
+        byte opcion;        
         
         do{
             System.out.println("\033[32m   ******");
@@ -58,7 +58,7 @@ public class Battleground {
         
     }   
     
-    public static Player initializePlayer(int i){
+    private static Player initializePlayer(int i){
         Player player = null;
         String gamer, op;
         do{
@@ -86,4 +86,13 @@ public class Battleground {
         }
         return null;
     }
+    
+    private static int getNextPosVacia(){
+        for(int i = 0; i < lastTen.length; i++){
+            if(lastTen[i] == null)
+                return i;
+        }
+        return -1;
+    }    
+    
 }

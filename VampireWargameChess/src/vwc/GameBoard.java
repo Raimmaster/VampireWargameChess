@@ -51,7 +51,18 @@ public final class GameBoard {
             finish = gameOver();
             actual = actual == x ? y : x;
         }while(finish == 'X' || cantGiros > 0);
-        return null;
+         
+       return null;
+    }
+    
+    //ESPACIOS VACÍOS EN EL ARREGLO
+    public void showEmptySpaces(){
+        for(int i = 0; i < chess.length; i++){
+            for(int j = 0; j < chess[i].length; j++){
+                if (chess[i][j] == null)
+                    System.out.printf("[%d][%d] - EMPTY\n", i, j);
+            }
+        }
     }
     
     /**
@@ -120,11 +131,7 @@ public final class GameBoard {
     private void inicializarPiezas(){
         //Ciclo para inicializar las piezas correctamente
         for(int i = 0; i < FILAS; i += 5){
-            char colour;
-            if (i == 0)
-                colour = 'B';
-            else
-                colour = 'N';
+            char colour = i == 0 ? 'B' : 'N';
             
             for(int j = 0; j < COLUMNAS; j++){
                 if(j == 0 || j == 5){

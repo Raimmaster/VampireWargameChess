@@ -68,8 +68,11 @@ public abstract class Pieza {
      * @param columna Número de la columna donde nos queremos mover
      * @return <code>true</code> si se puede mover
      */
-    public boolean mover (int fila, int columna){           
-        return validarMovimiento(fila, columna);
+    public void mover (int fila, int columna){        
+        if(validarMovimiento(fila, columna)){
+            row = fila;
+            column = columna;            
+        }
     }
     
     /**
