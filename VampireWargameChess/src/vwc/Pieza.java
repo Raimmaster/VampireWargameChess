@@ -72,14 +72,17 @@ public abstract class Pieza {
      * @param columna Número de la columna donde nos queremos mover
      * @return <code>true</code> si se puede mover
      */
-    public void mover (int fila, int columna){        
-        if(validarMovimiento(fila, columna)){
+    public boolean mover (int fila, int columna){        
+        boolean posible = validarMovimiento(fila, columna);
+        if(posible){
             row = fila;
             column = columna;
             posiciones.clear();
             updatePosiciones(fila, columna);
         }else
             System.out.println("COORDENADAS INVALIDAS.");
+        
+        return posible;
     }
     
     /**

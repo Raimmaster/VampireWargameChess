@@ -133,24 +133,32 @@ public final class GameBoard {
     
     private void moverPiezaToTile(Pieza p){
         int fila, columna;
-        do{                   
-            System.out.print("\nIngrese coordenada de fila : ");                   
-            fila = rd.nextInt();             
-        }while(fila < 0 && fila > 5);
-             
-        do{              
-            System.out.print("Ingrese coordenada de columna: ");              
-            columna = rd.nextInt();
-        }while(columna < 0 && columna > 5);
-        
+        boolean trueMove = false;
         do{
-            int pFila = p.getRow(), pCol = p.getColumn();
-            piezas[fila][columna] =  Character.toString(p.getTipo().charAt(0)) + p.getColor();//cambiar posicion en board
-            piezas[pFila][pCol] = "__";
-            chess[fila][columna] = p;//cambiar de posicion
-            chess[pFila][pCol] = null;//reset
-            p.mover(fila, columna);//mover
-        }while(chess[fila][columna] == null);
+            do{                   
+                System.out.print("\nIngrese coordenada de fila : ");                   
+                fila = rd.nextInt();             
+            }while(fila < 0 && fila > 5);
+
+            do{              
+                System.out.print("Ingrese coordenada de columna: ");              
+                columna = rd.nextInt();
+            }while(columna < 0 && columna > 5);
+            if (chess[fila][columna] != null)
+                continue;
+            //do{
+            System.out.println("TEST");
+                int pFila = p.getRow(), pCol = p.getColumn();      
+                trueMove = p.mover(fila, columna);
+                System.out.println(trueMove);
+                if(trueMove){//mover
+                    piezas[fila][columna] =  Character.toString(p.getTipo().charAt(0)) + p.getColor();//cambiar posicion en board
+                    piezas[pFila][pCol] = "__";
+                    chess[fila][columna] = p;//cambiar de posicion
+                    chess[pFila][pCol] = null;//reset
+                }                
+            //}while(chess[fila][columna] != null);
+        }while(!trueMove);
     }
     
     /**
