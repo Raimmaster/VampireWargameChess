@@ -67,7 +67,7 @@ public class Battleground {
             System.out.print("Ingrese nombre de Player " + i + ": ");
             gamer = rd.next();
             player = existe(gamer);
-            if (player == null && !player.getActive()){
+            if (player == null){
                 player = new Player(gamer);
                 players.add(player);
                 player.usePlayer();
