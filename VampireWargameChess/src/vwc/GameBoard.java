@@ -135,10 +135,27 @@ public final class GameBoard {
     }
     
     private void attackPiezaEnemiga(Pieza p){
-        
+        boolean atk = false;
+        do{
+            int coordinates[] = ingresarFilasColumnas();
+            if (chess[coordinates[0]][coordinates[1]] == null){
+                System.out.println("NO HAY PIEZAS EN ESTA COORDENADA");
+                continue;
+            }
+            Pieza pEnemy = chess[coordinates[0]][coordinates[1]];
+            atk = p.validarMovimiento(coordinates[0], coordinates[1]) && pEnemy.getColor() != p.getColor();
+            System.out.println(atk);
+            if(atk){
+                System.out.printf("SE ATACO LA PIEZA %s Y SE LE HAN QUITADO %d PUNTOS", pEnemy.getTipo(), p.getAp());
+                p.atacar(pEnemy);
+            }                
+        }while(!atk);
     }
     
-    //INGRESAR FILAS Y COLUMNAS
+    /**
+     * Ingresa la fila y columna a utilizar (mover o atacar o crear en caso de Necromancer).
+     * @return Arreglo de <code>int</code> con las coordenadas
+     */
     private int[] ingresarFilasColumnas(){
         int coordinates[] = new int[2];
         for(int i = 0; i < coordinates.length; i++){
@@ -154,19 +171,21 @@ public final class GameBoard {
         boolean trueMove = false;
         do{
             int coordinates[] = ingresarFilasColumnas();
-            if (chess[coordinates[0]][coordinates[1]] != null)
+            if (chess[coordinates[0]][coordinates[1]] != null){
+                System.out.println("EL ESPACIO ESTA LLENO; ELIJA OTRAS COORDENADAS!");
                 continue;
+            }
             //do{
             System.out.println("TEST");
-                int pFila = p.getRow(), pCol = p.getColumn();      
-                trueMove = p.mover(coordinates[0], coordinates[1]);
-                System.out.println(trueMove);
-                if(trueMove){//mover
-                    piezas[coordinates[0]][coordinates[1]] =  Character.toString(p.getTipo().charAt(0)) + p.getColor();//cambiar posicion en board
-                    piezas[pFila][pCol] = "__";
-                    chess[coordinates[0]][coordinates[1]] = p;//cambiar de posicion
-                    chess[pFila][pCol] = null;//reset
-                }                
+            int pFila = p.getRow(), pCol = p.getColumn();      
+            trueMove = p.mover(coordinates[0], coordinates[1]);
+            System.out.println(trueMove);
+            if(trueMove){//mover
+                piezas[coordinates[0]][coordinates[1]] =  Character.toString(p.getTipo().charAt(0)) + p.getColor();//cambiar posicion en board
+                piezas[pFila][pCol] = "__";
+                chess[coordinates[0]][coordinates[1]] = p;//cambiar de posicion
+                chess[pFila][pCol] = null;//reset
+            }                
             //}while(chess[fila][columna] != null);
         }while(!trueMove);
     }

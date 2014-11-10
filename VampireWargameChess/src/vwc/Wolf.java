@@ -66,6 +66,10 @@ public class Wolf extends Pieza {
             
             updatePosiciones(fila, columna, adjPositions + 1);
         }  
+        
+        for(Posicion p : posiciones){
+            System.out.printf("%n%n %d, %d %n", p.getX(), p.getY());
+        }
     }
     
     @Override

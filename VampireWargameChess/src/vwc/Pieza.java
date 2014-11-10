@@ -98,6 +98,9 @@ public abstract class Pieza {
             defender(ap - 1);
         }else if (hp == 0)
             System.out.printf("Pieza {%s} destruida!%n", tipo);
+        else if (hp > 0 && ap == 0)
+            System.out.printf("\nLE QUEDAN %d HP Y %d SP\n",
+                    this.hp, this.sp);
     }
     
     /**
