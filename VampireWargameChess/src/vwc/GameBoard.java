@@ -143,14 +143,14 @@ public final class GameBoard {
             columna = rd.nextInt();
         }while(columna < 0 && columna > 5);
         
-        if (chess[fila][columna] == null){
+        do{
             int pFila = p.getRow(), pCol = p.getColumn();
-            piezas[fila][columna] =  Character.toString(p.getTipo().charAt(0)) + p.getColor();
+            piezas[fila][columna] =  Character.toString(p.getTipo().charAt(0)) + p.getColor();//cambiar posicion en board
             piezas[pFila][pCol] = "__";
-            chess[fila][columna] = p;
-            chess[pFila][pCol] = null;
-            p.mover(fila, columna);
-        }
+            chess[fila][columna] = p;//cambiar de posicion
+            chess[pFila][pCol] = null;//reset
+            p.mover(fila, columna);//mover
+        }while(chess[fila][columna] == null);
     }
     
     /**
