@@ -55,8 +55,8 @@ public final class GameBoard {
             finish = gameOver();
             actual = actual == x ? y : x;
         }while(finish == 'X' || cantGiros > 0);
-         
-       return null;
+        System.out.println("SALIO");
+        return null;
     }
     
     //ESPACIOS VACÍOS EN EL ARREGLO
@@ -144,8 +144,11 @@ public final class GameBoard {
         }while(columna < 0 && columna > 5);
         
         if (chess[fila][columna] == null){
+            int pFila = p.getRow(), pCol = p.getColumn();
             piezas[fila][columna] =  Character.toString(p.getTipo().charAt(0)) + p.getColor();
-            piezas[p.getRow()][p.getColumn()] = "__";
+            piezas[pFila][pCol] = "__";
+            chess[fila][columna] = p;
+            chess[pFila][pCol] = null;
             p.mover(fila, columna);
         }
     }

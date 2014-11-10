@@ -75,7 +75,9 @@ public abstract class Pieza {
     public void mover (int fila, int columna){        
         if(validarMovimiento(fila, columna)){
             row = fila;
-            column = columna;            
+            column = columna;
+            posiciones.clear();
+            updatePosiciones(fila, columna);
         }else
             System.out.println("COORDENADAS INVALIDAS.");
     }

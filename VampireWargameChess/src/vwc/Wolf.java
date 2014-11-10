@@ -18,7 +18,7 @@ public class Wolf extends Pieza {
 
     @Override
     public void submenu() {      
-        System.out.printf("Acciones Vampiro: %n"
+        System.out.printf("Acciones Hombre Lobo: %n"
                 + "1. Mover\n"
                 + "2. Atacar\nIngrese su opcion: ");        
     }
