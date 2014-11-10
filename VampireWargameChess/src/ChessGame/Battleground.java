@@ -38,7 +38,8 @@ public class Battleground {
             
             switch(opcion){
                 case 1:
-                    GameBoard vampireChess = new GameBoard();                         
+                    GameBoard vampireChess = new GameBoard();
+                    resetActivePlayers;                         
                     for(int i = 0; i < 2; i++){
                         jugadores[i] = initializePlayer(i + 1);
                         jugadores[i].resetPiezasPerdidas();
@@ -66,13 +67,19 @@ public class Battleground {
             System.out.print("Ingrese nombre de Player " + i + ": ");
             gamer = rd.next();
             player = existe(gamer);
-            if (player == null){
+            if (player == null && !player.getActive()){
                 player = new Player(gamer);
                 players.add(player);
-            }else{
+                player.usePlayer();
+            }else if (player.getActive){
+                System.out.println("Jugador ya seleccionado para jugar");
+                player = null;
+            }else
                 System.out.print("Ya existe jugador, desea usarlo? (Si/No)");
                 op = rd.next();
-                if (op.equalsIgnoreCase("no"))
+                if (op.equalsIgnoreCase("si"))
+                    player.usePlayer();
+                else
                     player = null;
             }
         }while(player == null);
@@ -120,6 +127,12 @@ public class Battleground {
             }else
                 updateRanking(x, y+1);
                 
+        }
+    }
+
+    private static void resetActivePlayers(){
+        for (Player x : players){
+            x.disablePlayer();
         }
     }
 }

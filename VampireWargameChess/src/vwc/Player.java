@@ -14,12 +14,22 @@ public class Player {
     private String name;
     private int points, piezasPerdidas;
     private char color;
+    private boolean active;
     
     public Player(String n){
         name = n;
         points = 0;
         piezasPerdidas = 0;
         color = 'X';
+        active = false;
+    }
+
+    public void usePlayer(){
+        active = true;
+    }
+
+    public void disablePlayer(){
+        active = false;
     }
     
     public String getName() {
