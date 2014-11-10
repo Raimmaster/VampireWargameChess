@@ -50,7 +50,7 @@ public abstract class Pieza {
      * @param p Objeto Pieza que se quiere atacar
      */
     public final void atacar(Pieza p){
-        p.defender(ap);
+        p.defender(ap, ap);
     }
     
     /**
@@ -89,18 +89,18 @@ public abstract class Pieza {
      * Recibir el dano ocasionado por x pieza
      * @param ap Cantidad de dano inflingido
      */
-    public final void defender(int ap){
+    public final void defender(int ap, int apa){
         if (sp > 0 && ap > 0){
             sp--;
-            defender(ap - 1);
+            defender(ap - 1, apa);
         }else if (hp > 0 && ap > 0){
             hp--;
-            defender(ap - 1);
+            defender(ap - 1, apa);
         }else if (hp == 0)
             System.out.printf("Pieza {%s} destruida!%n", tipo);
         else if (hp > 0 && ap == 0)
-            System.out.printf("\nLE QUEDAN %d HP Y %d SP\n",
-                    this.hp, this.sp);
+            System.out.printf("SE HA ATACADO LA PIEZA %s, SE LE HAN QUITADO %d%nLE QUEDAN %d HP Y %d SP\n",
+                    this.tipo, apa-ap, this.hp, this.sp);
     }
     
     /**
