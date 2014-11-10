@@ -61,4 +61,8 @@ public class Necromancer extends Pieza{
        return 5;
     }
 
+    public Zombie createZombie(int fila, int columna){
+        return new Zombie(fila, columna, color);
+    }
+
 }
