@@ -23,6 +23,10 @@ public class Player {
         color = 'X';
         active = false;
     }
+    
+    public boolean getActive(){
+        return active;
+    }
 
     public void usePlayer(){
         active = true;

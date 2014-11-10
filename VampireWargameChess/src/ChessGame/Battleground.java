@@ -39,7 +39,7 @@ public class Battleground {
             switch(opcion){
                 case 1:
                     GameBoard vampireChess = new GameBoard();
-                    resetActivePlayers;                         
+                    resetActivePlayers();                         
                     for(int i = 0; i < 2; i++){
                         jugadores[i] = initializePlayer(i + 1);
                         jugadores[i].resetPiezasPerdidas();
@@ -71,10 +71,10 @@ public class Battleground {
                 player = new Player(gamer);
                 players.add(player);
                 player.usePlayer();
-            }else if (player.getActive){
+            }else if (player.getActive()){
                 System.out.println("Jugador ya seleccionado para jugar");
                 player = null;
-            }else
+            }else{
                 System.out.print("Ya existe jugador, desea usarlo? (Si/No)");
                 op = rd.next();
                 if (op.equalsIgnoreCase("si"))
