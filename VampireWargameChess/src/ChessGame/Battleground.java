@@ -119,10 +119,10 @@ public class Battleground {
     }
     
     private static void updateRanking(Player x, int y){
-        if (players.size() > 1){
-            if (players.get(y).getPoints() < x.getPoints()){
-                players.add(y, x);
+        if (y < players.size()){
+            if (x.getPoints() > players.get(y).getPoints()){
                 players.remove(x);
+                players.add(y, x);
                 return;
             }else
                 updateRanking(x, y+1);
@@ -133,6 +133,18 @@ public class Battleground {
     private static void resetActivePlayers(){
         for (Player x : players){
             x.disablePlayer();
+        }
+    }
+    
+    private static void printRanking(){
+        for (int i = 0; i < players.size(); i++) {
+            System.out.printf("Nombre: %s - %d points%n", players.get(i).getName(), players.get(i).getPoints());
+        }
+    }
+    
+    private static void printLastTen(){
+        for (int i = 0; i < lastTen.size(); i++) {
+            System.out.println(lastTen.get(i));
         }
     }
 }
