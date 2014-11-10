@@ -97,11 +97,13 @@ public class Battleground {
     }    
     
     private static void onlyTen(){
-        if (lastTen.size()>10){
-            for (int i = 9; i < lastTen.size()-1; i++) {
+        if (lastTen.size() > 10){
+            for (int i = 9; i < lastTen.size() - 1; i++) {
                 lastTen.remove(i);
             }
         }
+//        for(String s : lastTen)
+//            System.out.println(s);
     }
     
     public static void addPoints(Player x){

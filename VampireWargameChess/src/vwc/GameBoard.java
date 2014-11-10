@@ -47,8 +47,11 @@ public final class GameBoard {
             //elegir el tipo de pieza que se puede usar          
             piezaRul = Character.toString(tipoActual.charAt(0)) + Character.toString(actual.getColor());            
             //Validar las coordenadas de la pieza seleccionada
-            Pieza jugador = validarPiezaSeleccionada(piezaRul);       
-            jugador.submenu();
+            Pieza jugador = validarPiezaSeleccionada(piezaRul);
+            if (jugador == null){
+                return "JUGADOR " + actual.getName() + " SE HA RETIRADO";
+            }
+            accionarPieza(jugador);
             finish = gameOver();
             actual = actual == x ? y : x;
         }while(finish == 'X' || cantGiros > 0);
@@ -91,15 +94,25 @@ public final class GameBoard {
     private Pieza validarPiezaSeleccionada(String piezaRul){
         boolean state = false;
         int fila, columna;
+        Pieza p = null;
         do{
                 do{
                     System.out.print("\nIngrese fila de pieza: ");
                     fila = rd.nextInt();
-                }while(fila < 0 && fila > 5);
+                }while((fila < -1 && fila > 5));
                 do{
                     System.out.print("Ingrese columna de pieza: ");
                     columna = rd.nextInt();
-                }while(columna < 0 && columna > 5);
+                }while((columna < -1 && columna > 5));
+                
+                if (fila == -1 && columna == -1){
+                    System.out.print("DESEA RETIRARSE DEL JUEGO? Si/No: ");
+                    String answer = rd.next();
+                    if(answer.equalsIgnoreCase("Si"))
+                        return null;
+                    else
+                        continue;
+                }
                 
                 if (piezas[fila][columna].equalsIgnoreCase(piezaRul))
                     state = true;
@@ -113,7 +126,27 @@ public final class GameBoard {
         int eleccion = rd.nextInt();
         switch(eleccion){
             case 1:
+                moverPiezaToTile(p);
                 //p.mover(, FILAS);
+        }
+    }
+    
+    private void moverPiezaToTile(Pieza p){
+        int fila, columna;
+        do{                   
+            System.out.print("\nIngrese coordenada de fila : ");                   
+            fila = rd.nextInt();             
+        }while(fila < 0 && fila > 5);
+             
+        do{              
+            System.out.print("Ingrese coordenada de columna: ");              
+            columna = rd.nextInt();
+        }while(columna < 0 && columna > 5);
+        
+        if (chess[fila][columna] == null){
+            piezas[fila][columna] =  Character.toString(p.getTipo().charAt(0)) + p.getColor();
+            piezas[p.getRow()][p.getColumn()] = "__";
+            p.mover(fila, columna);
         }
     }
     

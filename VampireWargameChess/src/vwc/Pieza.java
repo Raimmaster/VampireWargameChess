@@ -19,6 +19,10 @@ public abstract class Pieza {
     protected int ap; //attack points
     protected char color; //color, B o N
     protected ArrayList<Posicion> posiciones = new ArrayList<>();
+
+    public String getTipo() {
+        return tipo;
+    }
     
     /**
      * Constructor de pieza
@@ -133,6 +137,14 @@ public abstract class Pieza {
         if (columna < 5)
             posiciones.add(new Posicion(fila, columna + 1));
     }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
         
     @Override
     public String toString() {
@@ -157,11 +169,7 @@ public abstract class Pieza {
 
     public int getAp() {
         return ap;
-    }
-
-    public void setAp(int ap) {
-        this.ap = ap;
-    }
+    }    
     
     public char getColor(){
         return color;
