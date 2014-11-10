@@ -107,13 +107,12 @@ public abstract class Pieza {
      * @return 
      */
     public boolean validarMovimiento(int fila, int columna){
-        boolean state = false;
         for (Posicion x : posiciones){
                 if (x.getX() == fila && x.getY() == columna){
-                    state = true;
+                    return true;
                 }
         }
-        return state;
+        return false;
     }
     
     /**
