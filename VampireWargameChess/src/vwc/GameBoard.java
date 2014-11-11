@@ -173,7 +173,7 @@ public final class GameBoard {
             }
             Pieza pEnemy = chess[coordinates[0]][coordinates[1]];
             atk = p.validarMovimiento(coordinates[0], coordinates[1]) && pEnemy.getColor() != p.getColor();
-            System.out.println(atk);
+            //System.out.println(atk);
             if (atk) {
                 //p.atacar(pEnemy);
                 if (p.atacar(pEnemy)) {
@@ -200,7 +200,7 @@ public final class GameBoard {
                 }
                 pEnemy = chess[coordinates[0]][coordinates[1]];
                 atk = pZombie.validarMovimiento(coordinates[0], coordinates[1]) && pEnemy.getColor() != p.getColor();
-                System.out.println(atk);
+                //System.out.println(atk);
                 if (atk) {
                     //p.atacar(pEnemy);
                     if (pZombie.atacar(pEnemy)) {
@@ -227,7 +227,7 @@ public final class GameBoard {
             }
             Pieza pEnemy = chess[coordinates[0]][coordinates[1]];
             atk = p.validarMovimiento(coordinates[0], coordinates[1]) && pEnemy.getColor() != p.getColor();
-            System.out.println(atk);
+            //System.out.println(atk);
             if (atk) {
                 //p.atacar(pEnemy);
                 if (p.ataqueEspecial(pEnemy)) {
