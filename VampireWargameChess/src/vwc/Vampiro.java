@@ -29,9 +29,12 @@ public class Vampiro extends Pieza{
     }
 
     @Override
-    public void ataqueEspecial(Pieza p) {
+    public boolean ataqueEspecial(Pieza p) {
         p.setHp(p.hp - 1);
         hp += 1;
+        if (p.getHp() == 0)
+            return true;
+        return false;
     }
 
     @Override

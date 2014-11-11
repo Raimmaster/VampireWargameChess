@@ -74,7 +74,7 @@ public class Wolf extends Pieza {
     }
 
     @Override
-    public void ataqueEspecial(Pieza p) {
+    public boolean ataqueEspecial(Pieza p) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

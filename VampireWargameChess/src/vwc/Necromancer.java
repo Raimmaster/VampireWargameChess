@@ -27,9 +27,9 @@ public class Necromancer extends Pieza{
     }
 
     @Override
-    public void ataqueEspecial(Pieza p) {
+    public boolean ataqueEspecial(Pieza p) {
         int ap = p.getSp()+ (this.ap/2);
-        p.defender(ap, ap);
+        return p.defender(ap, ap);
     }
 
     @Override
@@ -64,5 +64,35 @@ public class Necromancer extends Pieza{
     public Zombie createZombie(int fila, int columna){
         return new Zombie(fila, columna, color);
     }
-
+    
+    public void updateSpecial(){
+        posiciones.clear();
+        updatePosicionesSpecial(row, column, 1);
+    }
+    
+    private void updatePosicionesSpecial(int fila, int columna, int adjPositions){
+        final int LIMIT_SUP = 6, LIMIT_INF = -1;//LIMITES DEL BOARD
+        if(adjPositions <= 2){
+            if (fila < LIMIT_SUP - adjPositions){
+                posiciones.add(new Posicion(fila + adjPositions, columna));
+                if (columna > LIMIT_INF + adjPositions)
+                    posiciones.add(new Posicion(fila + adjPositions, columna - adjPositions));
+                if (columna < LIMIT_SUP - adjPositions)
+                    posiciones.add(new Posicion(fila + adjPositions, columna + adjPositions));
+            }
+            if (fila > LIMIT_INF + adjPositions){
+                posiciones.add(new Posicion(fila - adjPositions, columna));
+                if (columna > LIMIT_INF + adjPositions)
+                    posiciones.add(new Posicion(fila - adjPositions, columna - adjPositions));
+                if (columna < LIMIT_SUP - adjPositions)
+                    posiciones.add(new Posicion(fila - adjPositions, columna + adjPositions));
+            }
+            if (columna > LIMIT_INF + adjPositions)
+                posiciones.add(new Posicion(fila, columna - adjPositions));
+            if (columna < LIMIT_SUP - adjPositions)
+                posiciones.add(new Posicion(fila, columna + adjPositions));
+            
+            updatePosicionesSpecial(fila, columna, adjPositions + 1);
+        }
+    }
 }

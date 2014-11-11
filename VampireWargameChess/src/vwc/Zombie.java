@@ -12,8 +12,9 @@ package vwc;
  */
 public class Zombie extends Pieza{
 
-    public Zombie(int c, int r, char col) {
+    public Zombie(int r, int c, char col) {
         super(TipoPieza.ZOMBIE.hp, TipoPieza.ZOMBIE.sp,TipoPieza.ZOMBIE.ap,r,c,TipoPieza.ZOMBIE.getTipo(),col);
+        
     }
 
     @Override
@@ -32,7 +33,7 @@ public class Zombie extends Pieza{
     }
 
     @Override
-    public void ataqueEspecial(Pieza p) {
+    public boolean ataqueEspecial(Pieza p) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
