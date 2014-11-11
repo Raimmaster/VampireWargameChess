@@ -202,7 +202,7 @@ public final class GameBoard {
                 System.out.println(atk);
                 if (atk) {
                     //p.atacar(pEnemy);
-                    if (p.atacar(pEnemy)) {
+                    if (pZombie.atacar(pEnemy)) {
                         chess[coordinates[0]][coordinates[1]] = null;
                         piezas[coordinates[0]][coordinates[1]] = "__";
                         //System.out.println(piezas[coordinates[0]][coordinates[1]] + " ELIMINATED!!!\n");//PROBAR SI LIMPIO
