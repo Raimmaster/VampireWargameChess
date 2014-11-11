@@ -352,8 +352,8 @@ public final class GameBoard {
                 }
             }
         }
-            jug1.setPiezasPerdidas(b);
-            jug2.setPiezasPerdidas(n);
+            jug1.setPiezasPerdidas(6-b);
+            jug2.setPiezasPerdidas(6-n);
         if (b == 0) {
             return 'N';
         } else if (n == 0) {
