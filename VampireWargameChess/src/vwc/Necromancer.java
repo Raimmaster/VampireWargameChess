@@ -28,8 +28,19 @@ public class Necromancer extends Pieza{
 
     @Override
     public boolean ataqueEspecial(Pieza p) {
-        int ap = p.getSp()+ (this.ap/2);
-        return p.defender(ap, ap);
+        int hpc = p.getHp();
+        if (hpc > ap){
+            p.setHp(hpc-ap);
+            System.out.printf("SE HA ATACADO LA PIEZA %s, SE LE HAN QUITADO %d%nLE QUEDAN %d HP Y %d SP\n",
+                    p.tipo, ap, p.hp, p.sp);
+            return false;
+        }else{
+            p.setHp(0);
+            System.out.printf("SE HA ATACADO LA PIEZA %s, SE LE HAN QUITADO %d%nLE QUEDAN %d HP Y %d SP\n",
+                    p.tipo, hpc, p.hp, p.sp);
+            return true;
+        }
+            
     }
 
     @Override
