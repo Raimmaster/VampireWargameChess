@@ -48,27 +48,23 @@ public class Wolf extends Pieza {
             if (fila < LIMIT_SUP - adjPositions){
                 posiciones.add(new Posicion(fila + adjPositions, columna));
                 if (columna > LIMIT_INF + adjPositions)
-                    posiciones.add(new Posicion(fila + 1, columna - 1));
+                    posiciones.add(new Posicion(fila + adjPositions, columna - adjPositions));
                 if (columna < LIMIT_SUP - adjPositions)
-                    posiciones.add(new Posicion(fila + 1, columna + 1));
+                    posiciones.add(new Posicion(fila + adjPositions, columna + adjPositions));
             }
             if (fila > LIMIT_INF + adjPositions){
-                posiciones.add(new Posicion(fila - 1, columna));
+                posiciones.add(new Posicion(fila - adjPositions, columna));
                 if (columna > LIMIT_INF + adjPositions)
-                    posiciones.add(new Posicion(fila - 1, columna - 1));
+                    posiciones.add(new Posicion(fila - adjPositions, columna - adjPositions));
                 if (columna < LIMIT_SUP - adjPositions)
-                    posiciones.add(new Posicion(fila - 1, columna + 1));
+                    posiciones.add(new Posicion(fila - adjPositions, columna + adjPositions));
             }
             if (columna > LIMIT_INF + adjPositions)
-                posiciones.add(new Posicion(fila, columna - 1));
+                posiciones.add(new Posicion(fila, columna - adjPositions));
             if (columna < LIMIT_SUP - adjPositions)
-                posiciones.add(new Posicion(fila, columna + 1));
+                posiciones.add(new Posicion(fila, columna + adjPositions));
             
             updatePosiciones(fila, columna, adjPositions + 1);
-        }  
-        
-        for(Posicion p : posiciones){
-            System.out.printf("%n%n %d, %d %n", p.getX(), p.getY());
         }
     }
     
