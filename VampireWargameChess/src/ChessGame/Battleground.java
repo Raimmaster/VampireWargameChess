@@ -44,7 +44,9 @@ public class Battleground {
                         jugadores[i] = initializePlayer(i + 1);
                         jugadores[i].resetPiezasPerdidas();
                     }
-                    lastTen.add(0,vampireChess.playGame(jugadores[0], jugadores[1]));
+                    String winMessage = vampireChess.playGame(jugadores[0], jugadores[1]);
+                    System.out.println(winMessage);
+                    lastTen.add(0, winMessage);
                     onlyTen();
                     break;
                 case 2://RANKING
