@@ -146,8 +146,12 @@ public final class GameBoard {
             atk = p.validarMovimiento(coordinates[0], coordinates[1]) && pEnemy.getColor() != p.getColor();
             System.out.println(atk);
             if(atk){
-                System.out.printf("SE ATACO LA PIEZA %s Y SE LE HAN QUITADO %d PUNTOS", pEnemy.getTipo(), p.getAp());
-                p.atacar(pEnemy);
+                //p.atacar(pEnemy);
+                if(p.atacar(pEnemy)){
+                    chess[coordinates[0]][coordinates[1]] = null;
+                    piezas[coordinates[0]][coordinates[1]] = "__";
+                    System.out.println(piezas[coordinates[0]][coordinates[1]] + " ELIMINATED!!!\n");//PROBAR SI LIMPIO
+                }
             }                
         }while(!atk);
     }
