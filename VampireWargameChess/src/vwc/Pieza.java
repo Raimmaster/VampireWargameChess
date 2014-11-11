@@ -120,7 +120,7 @@ public abstract class Pieza {
     public boolean validarMovimiento(int fila, int columna){
         for (Posicion x : posiciones){
                 if (x.getX() == fila && x.getY() == columna){
-                    System.out.print("Validar Movimiento: " + true);
+                    //System.out.print("Validar Movimiento: " + true);
                     return true;
                 }
         }
