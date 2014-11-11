@@ -25,7 +25,7 @@ public class Vampiro extends Pieza{
         System.out.printf("Acciones Vampiro: %n"
                 + "1. Mover\n"
                 + "2. Atacar\n"
-                + "3. Ataque Especial\nIngrese su opcion:");
+                + "3. Ataque Especial\nIngrese su opcion: ");
     }
 
     @Override

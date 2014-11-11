@@ -48,10 +48,36 @@ public abstract class Pieza {
     /**
      * Realiza la acción necesaria de ataque
      * @param p Objeto Pieza que se quiere atacar
+     * @return <code>true</code> si se destruyo la pieza
      */
     public final boolean atacar(Pieza p){
         return p.defender(ap, ap);
     }
+      
+    /**
+     * Recibir el dano ocasionado por x pieza
+     * @param ap Cantidad de daño inflingido
+     * @return <code>true</code>true si se destruyo
+     */
+    public final boolean defender(int ap, int apa){
+        boolean state = false;
+        if (sp > 0 && ap > 0){
+            sp--;
+            return defender(ap - 1, apa);
+        }else if (hp > 0 && ap > 0){
+            hp--;
+            return defender(ap - 1, apa);
+        }else if (hp == 0){
+            System.out.printf("Pieza {%s} destruida!%n", tipo);
+            state = true;
+        }
+        else if (hp > 0 && ap == 0)
+            System.out.printf("SE HA ATACADO LA PIEZA %s, SE LE HAN QUITADO %d%nLE QUEDAN %d HP Y %d SP\n",
+                    this.tipo, apa-ap, this.hp, this.sp);
+        
+        return state;
+    }
+    
     
     /**
      * Valida la posición de la pieza
@@ -83,29 +109,6 @@ public abstract class Pieza {
             System.out.println("COORDENADAS INVALIDAS.");
         
         return posible;
-    }
-    
-    /**
-     * Recibir el dano ocasionado por x pieza
-     * @param ap Cantidad de dano inflingido
-     */
-    public final boolean defender(int ap, int apa){
-        boolean state = false;
-        if (sp > 0 && ap > 0){
-            sp--;
-            defender(ap - 1, apa);
-        }else if (hp > 0 && ap > 0){
-            hp--;
-            defender(ap - 1, apa);
-        }else if (hp == 0){
-            System.out.printf("Pieza {%s} destruida!%n", tipo);
-            state = true;
-        }
-        else if (hp > 0 && ap == 0)
-            System.out.printf("SE HA ATACADO LA PIEZA %s, SE LE HAN QUITADO %d%nLE QUEDAN %d HP Y %d SP\n",
-                    this.tipo, apa-ap, this.hp, this.sp);
-        
-        return state;
     }
     
     /**

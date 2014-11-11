@@ -48,10 +48,13 @@ public class Battleground {
                     onlyTen();
                     break;
                 case 2://RANKING
+                    printRanking();
                     break;
                 case 3://LOG - LAST 10 GAMES
+                    printLastTen();
                     break;
                 case 4://SALIR
+                    System.out.println("ADIOS...");
                     break;
                 default:
                     System.out.println("Opcion invalida. Ingrese de nuevo.");
@@ -93,14 +96,6 @@ public class Battleground {
                 return x;
         }
         return null;
-    }
-    
-    private static int getNextPosVacia(){
-        for(int i = 0; i < lastTen.size(); i++){
-            if(lastTen.get(i) == null)
-                return i;
-        }
-        return -1;
     }    
     
     private static void onlyTen(){

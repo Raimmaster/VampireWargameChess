@@ -150,7 +150,7 @@ public final class GameBoard {
                 if(p.atacar(pEnemy)){
                     chess[coordinates[0]][coordinates[1]] = null;
                     piezas[coordinates[0]][coordinates[1]] = "__";
-                    System.out.println(piezas[coordinates[0]][coordinates[1]] + " ELIMINATED!!!\n");//PROBAR SI LIMPIO
+                    //System.out.println(piezas[coordinates[0]][coordinates[1]] + " ELIMINATED!!!\n");//PROBAR SI LIMPIO
                 }
             }                
         }while(!atk);
@@ -180,10 +180,10 @@ public final class GameBoard {
                 continue;
             }
             //do{
-            System.out.println("TEST");
+            //System.out.println("TEST");
             int pFila = p.getRow(), pCol = p.getColumn();      
             trueMove = p.mover(coordinates[0], coordinates[1]);
-            System.out.println(trueMove);
+            //System.out.println(trueMove);
             if(trueMove){//mover
                 piezas[coordinates[0]][coordinates[1]] =  Character.toString(p.getTipo().charAt(0)) + p.getColor();//cambiar posicion en board
                 piezas[pFila][pCol] = "__";
