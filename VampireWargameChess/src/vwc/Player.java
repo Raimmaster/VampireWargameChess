@@ -56,8 +56,8 @@ public class Player {
         color = c;
     }
     
-    public void aumentarPiezasPerdidas(){
-        piezasPerdidas++;
+    public void setPiezasPerdidas(int pp){
+        piezasPerdidas = pp;
     }
     
     public void resetPiezasPerdidas(){

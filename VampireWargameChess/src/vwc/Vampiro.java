@@ -32,8 +32,12 @@ public class Vampiro extends Pieza{
     public boolean ataqueEspecial(Pieza p) {
         p.setHp(p.hp - 1);
         hp += 1;
-        if (p.getHp() == 0)
+        System.out.printf("SE HA ATACADO LA PIEZA %s, SE LE HAN QUITADO %d%nLE QUEDAN %d HP Y %d SP\n",
+                    p.tipo, 1, p.hp, p.sp);
+        if (p.getHp() == 0){
+            System.out.printf("Pieza {%s} destruida!%n", p.getTipo());
             return true;
+        }
         return false;
     }
 

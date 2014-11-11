@@ -57,7 +57,7 @@ public final class GameBoard {
                     accionarPieza(jugador);
                 }
                 cantGiros--;
-                finish = gameOver();
+                finish = gameOver(x, y);
             } while (finish == 'X' && cantGiros > 0);
             actual = actual == x ? y : x;
         } while (finish == 'X');
@@ -179,6 +179,7 @@ public final class GameBoard {
                 if (p.atacar(pEnemy)) {
                     chess[coordinates[0]][coordinates[1]] = null;
                     piezas[coordinates[0]][coordinates[1]] = "__";
+                    
                     //System.out.println(piezas[coordinates[0]][coordinates[1]] + " ELIMINATED!!!\n");//PROBAR SI LIMPIO
                 }
             }
@@ -338,7 +339,7 @@ public final class GameBoard {
      *
      * @return
      */
-    private char gameOver() {
+    private char gameOver(Player jug1, Player jug2) {
         int b = 0, n = 0;
         for (Pieza x[] : chess) {
             for (Pieza y : x) {
@@ -351,6 +352,8 @@ public final class GameBoard {
                 }
             }
         }
+            jug1.setPiezasPerdidas(b);
+            jug2.setPiezasPerdidas(n);
         if (b == 0) {
             return 'N';
         } else if (n == 0) {
