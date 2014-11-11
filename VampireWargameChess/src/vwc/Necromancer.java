@@ -29,7 +29,7 @@ public class Necromancer extends Pieza{
     @Override
     public void ataqueEspecial(Pieza p) {
         int ap = p.getSp()+ (this.ap/2);
-        p.defender(ap);
+        p.defender(ap, ap);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class Necromancer extends Pieza{
                 mover(fila, columna);
                 break;
             case 2:         
-                p.defender(ap);
+                p.defender(ap, ap);
                 break;
             case 3:            
                 ataqueEspecial(p);
@@ -50,7 +50,7 @@ public class Necromancer extends Pieza{
                 System.out.print("");
                 break;
             case 5:       
-                p.defender(TipoPieza.ZOMBIE.ap);                   
+                p.defender(TipoPieza.ZOMBIE.ap, TipoPieza.ZOMBIE.ap);                   
                 break;
         }
         return q;
