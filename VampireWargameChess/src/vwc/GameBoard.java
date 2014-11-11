@@ -274,6 +274,13 @@ public final class GameBoard {
     }
     
     private boolean buscarPiezaTablero(String t){
-        return true;
+        boolean found = false;
+        for (int i = 0; i < FILAS; i++) {
+            for (int j = 0; j < COLUMNAS; j++) {
+                if (piezas[i][j].equalsIgnoreCase(t))
+                    found = true;
+            }
+        }
+        return found;
     }
 }
